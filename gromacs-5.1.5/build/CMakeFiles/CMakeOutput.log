@@ -1,0 +1,1133 @@
+The system is: Linux - 2.6.32-431.29.2.lustre.el6.x86_64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/sw-mpp/bin/mpicc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced ".tune_err"
+
+The C compiler identification is GNU, found in "/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/2.8.12.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/sw-mpp/bin/mpiCC 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced ".tune_err"
+
+The CXX compiler identification is GNU, found in "/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/2.8.12.2/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1015802930/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1015802930.dir/build.make CMakeFiles/cmTryCompileExec1015802930.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1015802930.dir/testCCompiler.c.o
+/usr/sw-mpp/bin/mpicc    -o CMakeFiles/cmTryCompileExec1015802930.dir/testCCompiler.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec1015802930
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1015802930.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc       CMakeFiles/cmTryCompileExec1015802930.dir/testCCompiler.c.o  -o cmTryCompileExec1015802930 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec488636907/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec488636907.dir/build.make CMakeFiles/cmTryCompileExec488636907.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o
+/usr/sw-mpp/bin/mpicc    -o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec488636907
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec488636907.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc     -v CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec488636907 -rdynamic  
+mpicc for SW version 2.2a
+SWCC Compilers: Version 5.421-sw-500 by xiaoq at devcomp.yichu.jn on 2017-08-21 16:17:52 +0800
+/usr/sw-mpp/swcc/sw5gcc-binary/bin/sw5gcc -static -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -hybrid -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -v -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -o cmTryCompileExec488636907 /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o -lmpi -lswtm -libverbs_wd -Wl,-zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -Wl,-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x -Wl,--wrap -Wl,gethostbyname -Wl,--wrap -Wl,getpwuid -Wl,--wrap -Wl,pthread_create -Wl,--wrap -Wl,pthread_cancel -Wl,--export-dynamic -static 
+Using built-in specs.
+Target: sw_64thl-unknown-linux-gnu
+Configured with: ../SRC/configure --prefix=/home/xiaoq/sw5gcc-binary --enable-languages=c,fortran --target=sw_64thl-unknown-linux-gnu --disable-nls --disable-shared --disable-libssp --with-headers=/home/xiaoq/sw5gcc-binary/sw_64thl-unknown-linux-gnu/sys-include -disable-checking --with-cpu=sw3
+Thread model: posix
+gcc version 4.1.2 20070214 (sw5gcc-1.2.14 by djby at devserver10 on Thu Apr 3 10:25:48 CST 2014)
+ /usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2 -m elf64sw_64 -O1 -static -o cmTryCompileExec488636907 /usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o -L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o -lmpi -lswtm -libverbs_wd -zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x --wrap gethostbyname --wrap getpwuid --wrap pthread_create --wrap pthread_cancel --export-dynamic --start-group -lgcc -lgcc_eh -lslave -lathread -lpthread -lc_slave -lmaster -lc --end-group /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec488636907/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec488636907.dir/build.make CMakeFiles/cmTryCompileExec488636907.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/sw-mpp/bin/mpicc    -o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec488636907]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec488636907.dir/link.txt --verbose=1]
+  ignore line: [/usr/sw-mpp/bin/mpicc     -v CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec488636907 -rdynamic  ]
+  ignore line: [mpicc for SW version 2.2a]
+  ignore line: [SWCC Compilers: Version 5.421-sw-500 by xiaoq at devcomp.yichu.jn on 2017-08-21 16:17:52 +0800]
+  ignore line: [/usr/sw-mpp/swcc/sw5gcc-binary/bin/sw5gcc -static -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -hybrid -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -v -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -o cmTryCompileExec488636907 /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o -lmpi -lswtm -libverbs_wd -Wl,-zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -Wl,-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x -Wl,--wrap -Wl,gethostbyname -Wl,--wrap -Wl,getpwuid -Wl,--wrap -Wl,pthread_create -Wl,--wrap -Wl,pthread_cancel -Wl,--export-dynamic -static ]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: sw_64thl-unknown-linux-gnu]
+  ignore line: [Configured with: ../SRC/configure --prefix=/home/xiaoq/sw5gcc-binary --enable-languages=c,fortran --target=sw_64thl-unknown-linux-gnu --disable-nls --disable-shared --disable-libssp --with-headers=/home/xiaoq/sw5gcc-binary/sw_64thl-unknown-linux-gnu/sys-include -disable-checking --with-cpu=sw3]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.1.2 20070214 (sw5gcc-1.2.14 by djby at devserver10 on Thu Apr 3 10:25:48 CST 2014)]
+  link line: [ /usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2 -m elf64sw_64 -O1 -static -o cmTryCompileExec488636907 /usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o -L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o -lmpi -lswtm -libverbs_wd -zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x --wrap gethostbyname --wrap getpwuid --wrap pthread_create --wrap pthread_cancel --export-dynamic --start-group -lgcc -lgcc_eh -lslave -lathread -lpthread -lc_slave -lmaster -lc --end-group /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o]
+    arg [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf64sw_64] ==> ignore
+    arg [-O1] ==> ignore
+    arg [-static] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec488636907] ==> ignore
+    arg [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o] ==> ignore
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/mpi2/lib] ==> dir [/usr/sw-mpp/mpi2/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/mpi2/lib] ==> dir [/usr/sw-mpp/mpi2/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib]
+    arg [/usr/sw-mpp/mpi2/lib/__slave_dma.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec488636907.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lmpi] ==> lib [mpi]
+    arg [-lswtm] ==> lib [swtm]
+    arg [-libverbs_wd] ==> lib [ibverbs_wd]
+    arg [-zmuldefs] ==> ignore
+    arg [-lrt] ==> lib [rt]
+    arg [-ldl] ==> lib [dl]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-lmv] ==> lib [mv]
+    arg [-lm] ==> lib [m]
+    arg [-lm] ==> lib [m]
+    arg [-los_master_isp] ==> lib [os_master_isp]
+    arg [-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [gethostbyname] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [getpwuid] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [pthread_create] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [pthread_cancel] ==> ignore
+    arg [--export-dynamic] ==> ignore
+    arg [--start-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_eh] ==> lib [gcc_eh]
+    arg [-lslave] ==> lib [slave]
+    arg [-lathread] ==> lib [athread]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-lc_slave] ==> lib [c_slave]
+    arg [-lmaster] ==> lib [master]
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_eh]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/mpi2/lib] ==> [/usr/sw-mpp/mpi2/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/mpi2/lib] ==> [/usr/sw-mpp/mpi2/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  implicit libs: [mpi;swtm;ibverbs_wd;rt;dl;pthread;mv;m;m;os_master_isp;slave;athread;pthread;c_slave;master;c]
+  implicit dirs: [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2;/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib;/usr/sw-mpp/lib;/usr/sw-mpp/mpi2/lib;/usr/sw-mpp/swcc/swgcc-binary/lib;/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib;/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2;/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc;/usr/sw-mpp/swcc/sw5gcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec305194381/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec305194381.dir/build.make CMakeFiles/cmTryCompileExec305194381.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec305194381.dir/testCXXCompiler.cxx.o
+/usr/sw-mpp/bin/mpiCC     -o CMakeFiles/cmTryCompileExec305194381.dir/testCXXCompiler.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec305194381
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec305194381.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC        CMakeFiles/cmTryCompileExec305194381.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec305194381 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1010471590/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1010471590.dir/build.make CMakeFiles/cmTryCompileExec1010471590.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o
+/usr/sw-mpp/bin/mpiCC     -o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec1010471590
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1010471590.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC      -v CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1010471590 -rdynamic  
+mpicxx for SWMPI version 2.2a
+SWCC Compilers: Version 5.421-sw-500 by xiaoq at devcomp.yichu.jn on 2017-08-21 16:17:52 +0800
+/usr/sw-mpp/swcc/sw5gcc-binary/bin/sw5gcc -static -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -hybrid -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -v -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -o cmTryCompileExec1010471590 /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -lmpicxx -lmpi -lswtm -libverbs_wd -Wl,-zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -lstdc++ -Wl,-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x -Wl,--wrap -Wl,gethostbyname -Wl,--wrap -Wl,getpwuid -Wl,--wrap -Wl,pthread_create -Wl,--wrap -Wl,pthread_cancel -Wl,--export-dynamic -static 
+Using built-in specs.
+Target: sw_64thl-unknown-linux-gnu
+Configured with: ../SRC/configure --prefix=/home/xiaoq/sw5gcc-binary --enable-languages=c,fortran --target=sw_64thl-unknown-linux-gnu --disable-nls --disable-shared --disable-libssp --with-headers=/home/xiaoq/sw5gcc-binary/sw_64thl-unknown-linux-gnu/sys-include -disable-checking --with-cpu=sw3
+Thread model: posix
+gcc version 4.1.2 20070214 (sw5gcc-1.2.14 by djby at devserver10 on Thu Apr 3 10:25:48 CST 2014)
+ /usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2 -m elf64sw_64 -O1 -static -o cmTryCompileExec1010471590 /usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o -L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -lmpicxx -lmpi -lswtm -libverbs_wd -zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -lstdc++ -T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x --wrap gethostbyname --wrap getpwuid --wrap pthread_create --wrap pthread_cancel --export-dynamic --start-group -lgcc -lgcc_eh -lslave -lathread -lpthread -lc_slave -lmaster -lc --end-group /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec1010471590/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1010471590.dir/build.make CMakeFiles/cmTryCompileExec1010471590.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/sw-mpp/bin/mpiCC     -o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec1010471590]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1010471590.dir/link.txt --verbose=1]
+  ignore line: [/usr/sw-mpp/bin/mpiCC      -v CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1010471590 -rdynamic  ]
+  ignore line: [mpicxx for SWMPI version 2.2a]
+  ignore line: [SWCC Compilers: Version 5.421-sw-500 by xiaoq at devcomp.yichu.jn on 2017-08-21 16:17:52 +0800]
+  ignore line: [/usr/sw-mpp/swcc/sw5gcc-binary/bin/sw5gcc -static -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -hybrid -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -v -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -o cmTryCompileExec1010471590 /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -lmpicxx -lmpi -lswtm -libverbs_wd -Wl,-zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -lstdc++ -Wl,-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x -Wl,--wrap -Wl,gethostbyname -Wl,--wrap -Wl,getpwuid -Wl,--wrap -Wl,pthread_create -Wl,--wrap -Wl,pthread_cancel -Wl,--export-dynamic -static ]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: sw_64thl-unknown-linux-gnu]
+  ignore line: [Configured with: ../SRC/configure --prefix=/home/xiaoq/sw5gcc-binary --enable-languages=c,fortran --target=sw_64thl-unknown-linux-gnu --disable-nls --disable-shared --disable-libssp --with-headers=/home/xiaoq/sw5gcc-binary/sw_64thl-unknown-linux-gnu/sys-include -disable-checking --with-cpu=sw3]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.1.2 20070214 (sw5gcc-1.2.14 by djby at devserver10 on Thu Apr 3 10:25:48 CST 2014)]
+  link line: [ /usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2 -m elf64sw_64 -O1 -static -o cmTryCompileExec1010471590 /usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o -L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/mpi2/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/swgcc-binary/lib -L/usr/sw-mpp/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2 -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc -L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib /usr/sw-mpp/mpi2/lib/__slave_dma.o CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o -lmpicxx -lmpi -lswtm -libverbs_wd -zmuldefs -lrt -ldl -lpthread -lmv -lm -lm -los_master_isp -lstdc++ -T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x --wrap gethostbyname --wrap getpwuid --wrap pthread_create --wrap pthread_cancel --export-dynamic --start-group -lgcc -lgcc_eh -lslave -lathread -lpthread -lc_slave -lmaster -lc --end-group /usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o /usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o]
+    arg [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../libexec/gcc/sw_64thl-unknown-linux-gnu/4.1.2/collect2] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf64sw_64] ==> ignore
+    arg [-O1] ==> ignore
+    arg [-static] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec1010471590] ==> ignore
+    arg [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib/crthost.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crti.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtbeginT.o] ==> ignore
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/mpi2/lib] ==> dir [/usr/sw-mpp/mpi2/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/mpi2/lib] ==> dir [/usr/sw-mpp/mpi2/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/swgcc-binary/lib] ==> dir [/usr/sw-mpp/swcc/swgcc-binary/lib]
+    arg [-L/usr/sw-mpp/lib] ==> dir [/usr/sw-mpp/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc]
+    arg [-L/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib] ==> dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib]
+    arg [/usr/sw-mpp/mpi2/lib/__slave_dma.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec1010471590.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lmpicxx] ==> lib [mpicxx]
+    arg [-lmpi] ==> lib [mpi]
+    arg [-lswtm] ==> lib [swtm]
+    arg [-libverbs_wd] ==> lib [ibverbs_wd]
+    arg [-zmuldefs] ==> ignore
+    arg [-lrt] ==> lib [rt]
+    arg [-ldl] ==> lib [dl]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-lmv] ==> lib [mv]
+    arg [-lm] ==> lib [m]
+    arg [-lm] ==> lib [m]
+    arg [-los_master_isp] ==> lib [os_master_isp]
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-T/usr/sw-mpp/swcc/sw5gcc-binary/lib/sw5-mix.x] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [gethostbyname] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [getpwuid] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [pthread_create] ==> ignore
+    arg [--wrap] ==> ignore
+    arg [pthread_cancel] ==> ignore
+    arg [--export-dynamic] ==> ignore
+    arg [--start-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_eh] ==> lib [gcc_eh]
+    arg [-lslave] ==> lib [slave]
+    arg [-lathread] ==> lib [athread]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-lc_slave] ==> lib [c_slave]
+    arg [-lmaster] ==> lib [master]
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/crtend.o] ==> ignore
+    arg [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_eh]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/mpi2/lib] ==> [/usr/sw-mpp/mpi2/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/mpi2/lib] ==> [/usr/sw-mpp/mpi2/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/swgcc-binary/lib] ==> [/usr/sw-mpp/swcc/swgcc-binary/lib]
+  collapse library dir [/usr/sw-mpp/lib] ==> [/usr/sw-mpp/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib] ==> [/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc]
+  collapse library dir [/usr/sw-mpp/swcc/sw5gcc-binary/bin/../lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2/../../../../sw_64thl-unknown-linux-gnu/lib] ==> [/usr/sw-mpp/swcc/sw5gcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  implicit libs: [mpicxx;mpi;swtm;ibverbs_wd;rt;dl;pthread;mv;m;m;os_master_isp;stdc++;slave;athread;pthread;c_slave;master;c]
+  implicit dirs: [/usr/sw-mpp/swcc/swgcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2;/usr/sw-mpp/swcc/swgcc-binary/sw_64thl-unknown-linux-gnu/lib;/usr/sw-mpp/lib;/usr/sw-mpp/mpi2/lib;/usr/sw-mpp/swcc/swgcc-binary/lib;/usr/sw-mpp/swcc/lib/gcc-lib/sw_64-swcc-linux/5.421-sw-500/lib;/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc/sw_64thl-unknown-linux-gnu/4.1.2;/usr/sw-mpp/swcc/sw5gcc-binary/lib/gcc;/usr/sw-mpp/swcc/sw5gcc-binary/sw_64thl-unknown-linux-gnu/lib]
+  implicit fwks: []
+
+
+Performing C SOURCE FILE Test CFLAGS_PRAGMA succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3491501636/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3491501636.dir/build.make CMakeFiles/cmTryCompileExec3491501636.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3491501636.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_PRAGMA -Wno-unknown-pragmas   -o CMakeFiles/cmTryCompileExec3491501636.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec3491501636
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3491501636.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_PRAGMA -Wno-unknown-pragmas    CMakeFiles/cmTryCompileExec3491501636.dir/src.c.o  -o cmTryCompileExec3491501636 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test CFLAGS_WARN succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3268630899/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3268630899.dir/build.make CMakeFiles/cmTryCompileExec3268630899.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3268630899.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_WARN -Wall -Wno-unused -Wunused-value -Wunused-parameter   -o CMakeFiles/cmTryCompileExec3268630899.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec3268630899
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3268630899.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_WARN -Wall -Wno-unused -Wunused-value -Wunused-parameter    CMakeFiles/cmTryCompileExec3268630899.dir/src.c.o  -o cmTryCompileExec3268630899 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test CFLAGS_WARN_UNDEF succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2173630329/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2173630329.dir/build.make CMakeFiles/cmTryCompileExec2173630329.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2173630329.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_WARN_UNDEF -Wundef   -o CMakeFiles/cmTryCompileExec2173630329.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec2173630329
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2173630329.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_WARN_UNDEF -Wundef    CMakeFiles/cmTryCompileExec2173630329.dir/src.c.o  -o cmTryCompileExec2173630329 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test CFLAGS_COPT succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2034300106/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2034300106.dir/build.make CMakeFiles/cmTryCompileExec2034300106.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2034300106.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_COPT -funroll-all-loops   -o CMakeFiles/cmTryCompileExec2034300106.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec2034300106
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2034300106.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_COPT -funroll-all-loops    CMakeFiles/cmTryCompileExec2034300106.dir/src.c.o  -o cmTryCompileExec2034300106 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test CFLAGS_NOINLINE succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec760193066/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec760193066.dir/build.make CMakeFiles/cmTryCompileExec760193066.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec760193066.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_NOINLINE -fno-inline   -o CMakeFiles/cmTryCompileExec760193066.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec760193066
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec760193066.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -DCFLAGS_NOINLINE -fno-inline    CMakeFiles/cmTryCompileExec760193066.dir/src.c.o  -o cmTryCompileExec760193066 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main(void) { return 0; }
+Performing C++ SOURCE FILE Test CXXFLAGS_PRAGMA succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1125717928/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1125717928.dir/build.make CMakeFiles/cmTryCompileExec1125717928.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1125717928.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_PRAGMA -Wno-unknown-pragmas   -o CMakeFiles/cmTryCompileExec1125717928.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec1125717928
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1125717928.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_PRAGMA -Wno-unknown-pragmas    CMakeFiles/cmTryCompileExec1125717928.dir/src.cxx.o  -o cmTryCompileExec1125717928 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test CXXFLAGS_WARN succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3203637120/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3203637120.dir/build.make CMakeFiles/cmTryCompileExec3203637120.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3203637120.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_WARN -Wall -Wno-unused-function   -o CMakeFiles/cmTryCompileExec3203637120.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec3203637120
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3203637120.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_WARN -Wall -Wno-unused-function    CMakeFiles/cmTryCompileExec3203637120.dir/src.cxx.o  -o cmTryCompileExec3203637120 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test CXXFLAGS_WARN_UNDEF succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3849678966/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3849678966.dir/build.make CMakeFiles/cmTryCompileExec3849678966.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3849678966.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_WARN_UNDEF -Wundef   -o CMakeFiles/cmTryCompileExec3849678966.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec3849678966
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3849678966.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_WARN_UNDEF -Wundef    CMakeFiles/cmTryCompileExec3849678966.dir/src.cxx.o  -o cmTryCompileExec3849678966 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test CXXFLAGS_COPT succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1399485747/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1399485747.dir/build.make CMakeFiles/cmTryCompileExec1399485747.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1399485747.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_COPT -funroll-all-loops   -o CMakeFiles/cmTryCompileExec1399485747.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec1399485747
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1399485747.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_COPT -funroll-all-loops    CMakeFiles/cmTryCompileExec1399485747.dir/src.cxx.o  -o cmTryCompileExec1399485747 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test CXXFLAGS_NOINLINE succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3566733270/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3566733270.dir/build.make CMakeFiles/cmTryCompileExec3566733270.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3566733270.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_NOINLINE -fno-inline   -o CMakeFiles/cmTryCompileExec3566733270.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec3566733270
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3566733270.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -DCXXFLAGS_NOINLINE -fno-inline    CMakeFiles/cmTryCompileExec3566733270.dir/src.cxx.o  -o cmTryCompileExec3566733270 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Determining if files unistd.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec626815070/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec626815070.dir/build.make CMakeFiles/cmTryCompileExec626815070.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec626815070.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec626815070.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec626815070
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec626815070.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec626815070.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec626815070 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files pwd.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2699044239/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2699044239.dir/build.make CMakeFiles/cmTryCompileExec2699044239.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2699044239.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec2699044239.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec2699044239
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2699044239.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec2699044239.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec2699044239 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files dirent.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec730005016/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec730005016.dir/build.make CMakeFiles/cmTryCompileExec730005016.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec730005016.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec730005016.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec730005016
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec730005016.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec730005016.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec730005016 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files time.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1379947379/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1379947379.dir/build.make CMakeFiles/cmTryCompileExec1379947379.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1379947379.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1379947379.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec1379947379
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1379947379.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1379947379.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec1379947379 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files sys/time.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec209002039/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec209002039.dir/build.make CMakeFiles/cmTryCompileExec209002039.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec209002039.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec209002039.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec209002039
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec209002039.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec209002039.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec209002039 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files sched.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3902674501/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3902674501.dir/build.make CMakeFiles/cmTryCompileExec3902674501.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3902674501.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec3902674501.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec3902674501
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3902674501.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec3902674501.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec3902674501 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files regex.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1563687504/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1563687504.dir/build.make CMakeFiles/cmTryCompileExec1563687504.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1563687504.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1563687504.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec1563687504
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1563687504.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1563687504.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec1563687504 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the posix_memalign exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec710345094/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec710345094.dir/build.make CMakeFiles/cmTryCompileExec710345094.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec710345094.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec710345094.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec710345094
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec710345094.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec710345094.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec710345094 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef posix_memalign
+  return ((int*)(&posix_memalign))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the gettimeofday exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2879651935/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2879651935.dir/build.make CMakeFiles/cmTryCompileExec2879651935.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2879651935.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec2879651935.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec2879651935
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2879651935.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec2879651935.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec2879651935 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <sys/time.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef gettimeofday
+  return ((int*)(&gettimeofday))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sysconf exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3472513680/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3472513680.dir/build.make CMakeFiles/cmTryCompileExec3472513680.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3472513680.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec3472513680.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec3472513680
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3472513680.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec3472513680.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec3472513680 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sysconf
+  return ((int*)(&sysconf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the nice exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1125063375/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1125063375.dir/build.make CMakeFiles/cmTryCompileExec1125063375.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1125063375.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1125063375.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec1125063375
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1125063375.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1125063375.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec1125063375 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef nice
+  return ((int*)(&nice))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the fsync exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec832329415/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec832329415.dir/build.make CMakeFiles/cmTryCompileExec832329415.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec832329415.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec832329415.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec832329415
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec832329415.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec832329415.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec832329415 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <unistd.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef fsync
+  return ((int*)(&fsync))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the fileno exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec860642123/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec860642123.dir/build.make CMakeFiles/cmTryCompileExec860642123.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec860642123.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec860642123.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec860642123
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec860642123.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec860642123.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec860642123 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef fileno
+  return ((int*)(&fileno))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sigaction exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec647049252/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec647049252.dir/build.make CMakeFiles/cmTryCompileExec647049252.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec647049252.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec647049252.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec647049252
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec647049252.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec647049252.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec647049252 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <signal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sigaction
+  return ((int*)(&sigaction))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the sqrtf exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2982613406/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2982613406.dir/build.make CMakeFiles/cmTryCompileExec2982613406.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2982613406.dir/CheckSymbolExists.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec2982613406.dir/CheckSymbolExists.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec2982613406
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2982613406.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec2982613406.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec2982613406 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef sqrtf
+  return ((int*)(&sqrtf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function clock_gettime exists in the rt passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3660606560/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3660606560.dir/build.make CMakeFiles/cmTryCompileExec3660606560.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3660606560.dir/CheckFunctionExists.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=clock_gettime   -o CMakeFiles/cmTryCompileExec3660606560.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3660606560
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3660606560.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=clock_gettime    CMakeFiles/cmTryCompileExec3660606560.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3660606560 -rdynamic -lrt 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function feenableexcept exists in the m passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec82500718/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec82500718.dir/build.make CMakeFiles/cmTryCompileExec82500718.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec82500718.dir/CheckFunctionExists.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=feenableexcept   -o CMakeFiles/cmTryCompileExec82500718.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec82500718
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec82500718.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=feenableexcept    CMakeFiles/cmTryCompileExec82500718.dir/CheckFunctionExists.c.o  -o cmTryCompileExec82500718 -rdynamic -lm 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2787862557/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2787862557.dir/build.make CMakeFiles/cmTryCompileExec2787862557.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2787862557.dir/CheckIncludeFile.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec2787862557.dir/CheckIncludeFile.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2787862557
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2787862557.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec2787862557.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2787862557 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3425686535/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3425686535.dir/build.make CMakeFiles/cmTryCompileExec3425686535.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3425686535.dir/CheckIncludeFile.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec3425686535.dir/CheckIncludeFile.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3425686535
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3425686535.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec3425686535.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3425686535 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1293679643/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1293679643.dir/build.make CMakeFiles/cmTryCompileExec1293679643.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1293679643.dir/CheckIncludeFile.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1293679643.dir/CheckIncludeFile.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec1293679643
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1293679643.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1293679643.dir/CheckIncludeFile.c.o  -o cmTryCompileExec1293679643 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining size of unsigned short passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1074896731/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1074896731.dir/build.make CMakeFiles/cmTryCompileExec1074896731.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1074896731.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1074896731.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CheckTypeSize/CMAKE_SIZEOF_UNSIGNED_SHORT.c
+Linking C executable cmTryCompileExec1074896731
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1074896731.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1074896731.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o  -o cmTryCompileExec1074896731 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Performing C SOURCE FILE Test MPI_IN_PLACE_COMPILE_OK succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4248248372/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4248248372.dir/build.make CMakeFiles/cmTryCompileExec4248248372.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4248248372.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DMPI_IN_PLACE_COMPILE_OK   -o CMakeFiles/cmTryCompileExec4248248372.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c: In function 'main':
+/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c:5: warning: control reaches end of non-void function
+"/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c": Warning: Variable anon1 in main might be used uninitialized
+Linking C executable cmTryCompileExec4248248372
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4248248372.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DMPI_IN_PLACE_COMPILE_OK    CMakeFiles/cmTryCompileExec4248248372.dir/src.c.o  -o cmTryCompileExec4248248372 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+#include <mpi.h>
+int main(void) {
+  void* buf;
+  MPI_Allreduce(MPI_IN_PLACE, buf, 10, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
+}
+Determining if the function zlibVersion exists in the /usr/lib64/libz.so passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec704202547/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec704202547.dir/build.make CMakeFiles/cmTryCompileExec704202547.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec704202547.dir/CheckFunctionExists.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=zlibVersion   -o CMakeFiles/cmTryCompileExec704202547.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec704202547
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec704202547.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DCHECK_FUNCTION_EXISTS=zlibVersion    CMakeFiles/cmTryCompileExec704202547.dir/CheckFunctionExists.c.o  -o cmTryCompileExec704202547 -rdynamic -lz 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files pthread.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4246526862/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4246526862.dir/build.make CMakeFiles/cmTryCompileExec4246526862.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4246526862.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec4246526862.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec4246526862
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4246526862.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec4246526862.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec4246526862 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the pthread_create exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec208000886/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec208000886.dir/build.make CMakeFiles/cmTryCompileExec208000886.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec208000886.dir/CheckSymbolExists.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec208000886.dir/CheckSymbolExists.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec208000886
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec208000886.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec208000886.dir/CheckSymbolExists.c.o  -o cmTryCompileExec208000886 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+File /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if files pthread.h exist passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec284017469/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec284017469.dir/build.make CMakeFiles/cmTryCompileExec284017469.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec284017469.dir/CheckIncludeFiles.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec284017469.dir/CheckIncludeFiles.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec284017469
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec284017469.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec284017469.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec284017469 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Performing C SOURCE FILE Test PTHREAD_SETAFFINITY succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1942029102/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1942029102.dir/build.make CMakeFiles/cmTryCompileExec1942029102.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1942029102.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DPTHREAD_SETAFFINITY   -o CMakeFiles/cmTryCompileExec1942029102.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec1942029102
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1942029102.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DPTHREAD_SETAFFINITY    CMakeFiles/cmTryCompileExec1942029102.dir/src.c.o  -o cmTryCompileExec1942029102 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+#define _GNU_SOURCE
+#include <pthread.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+    int main(void) { cpu_set_t set;
+        CPU_ZERO(&set);
+        CPU_SET(0, &set);
+        pthread_setaffinity_np(pthread_self(), sizeof(set), &set);
+        return 0;
+    }
+Performing C SOURCE FILE Test _callconv_ succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3514034977/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3514034977.dir/build.make CMakeFiles/cmTryCompileExec3514034977.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3514034977.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -D_callconv_   -o CMakeFiles/cmTryCompileExec3514034977.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec3514034977
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3514034977.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -D_callconv_    CMakeFiles/cmTryCompileExec3514034977.dir/src.c.o  -o cmTryCompileExec3514034977 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int  f(int i) {return i;} int main(void) {return f(0);}
+Performing C SOURCE FILE Test HAVE_DLOPEN succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec604561977/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec604561977.dir/build.make CMakeFiles/cmTryCompileExec604561977.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec604561977.dir/src.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DHAVE_DLOPEN -I/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/dlfcn.h    -o CMakeFiles/cmTryCompileExec604561977.dir/src.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTryCompileExec604561977
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec604561977.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas  -DHAVE_DLOPEN    CMakeFiles/cmTryCompileExec604561977.dir/src.c.o  -o cmTryCompileExec604561977 -rdynamic -ldl 
+CMakeFiles/cmTryCompileExec604561977.dir/src.c.o: In function `main':/home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.c:3: warning: Using 'dlopen' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+#include <dlfcn.h>
+int main(void) {
+  dlopen(0,0);
+  return 0;
+}
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1802479999/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1802479999.dir/build.make CMakeFiles/cmTryCompileExec1802479999.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1802479999.dir/CheckIncludeFile.c.o
+/usr/sw-mpp/bin/mpicc   -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas     -o CMakeFiles/cmTryCompileExec1802479999.dir/CheckIncludeFile.c.o   -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec1802479999
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1802479999.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpicc      -Wundef -Wall -Wno-unused -Wunused-value -Wunused-parameter -Wno-unknown-pragmas      CMakeFiles/cmTryCompileExec1802479999.dir/CheckIncludeFile.c.o  -o cmTryCompileExec1802479999 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+
+Performing C++ SOURCE FILE Test HAS_NO_UNUSED_PARAMETER succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2318336425/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2318336425.dir/build.make CMakeFiles/cmTryCompileExec2318336425.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2318336425.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas  -DHAS_NO_UNUSED_PARAMETER -Wno-unused-parameter   -o CMakeFiles/cmTryCompileExec2318336425.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec2318336425
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2318336425.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC       -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas  -DHAS_NO_UNUSED_PARAMETER -Wno-unused-parameter    CMakeFiles/cmTryCompileExec2318336425.dir/src.cxx.o  -o cmTryCompileExec2318336425 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test HAS_NO_DEPRECATED succeded with the following output:
+Change Dir: /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3020181774/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3020181774.dir/build.make CMakeFiles/cmTryCompileExec3020181774.dir/build
+gmake[1]: Entering directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3020181774.dir/src.cxx.o
+/usr/sw-mpp/bin/mpiCC    -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas  -DHAS_NO_DEPRECATED -Wno-deprecated   -o CMakeFiles/cmTryCompileExec3020181774.dir/src.cxx.o -c /home/export/base/CPC/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTryCompileExec3020181774
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3020181774.dir/link.txt --verbose=1
+/usr/sw-mpp/bin/mpiCC       -Wundef -Wall -Wno-unused-function -Wno-unknown-pragmas  -DHAS_NO_DEPRECATED -Wno-deprecated    CMakeFiles/cmTryCompileExec3020181774.dir/src.cxx.o  -o cmTryCompileExec3020181774 -rdynamic 
+gmake[1]: Leaving directory `/home/export/online1/cpc051/zhaocg/gromacs-5.1.5/build/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0;}
