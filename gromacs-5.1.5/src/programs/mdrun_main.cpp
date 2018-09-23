@@ -37,8 +37,11 @@
 #include "gromacs/commandline/cmdlinemodulemanager.h"
 
 #include "mdrun/mdrun_main.h"
+#include "athread.h"
 
-int main(int argc, char *argv[])
-{
-    return gmx::CommandLineModuleManager::runAsMainCMain(argc, argv, &gmx_mdrun);
+int main(int argc, char *argv[]) {
+    athread_init();
+    int ret = gmx::CommandLineModuleManager::runAsMainCMain(argc, argv, &gmx_mdrun);
+    athread_halt();
+    return ret;
 }

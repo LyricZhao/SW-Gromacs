@@ -485,8 +485,21 @@ static void do_nb_verlet(t_forcerec *fr,
     {
         wallcycle_sub_start(wcycle, ewcsNONBONDED);
     }
-    switch (nbvg->kernel_type)
-    {
+
+    /* SunWay Kernel */
+    nbnxn_kernel_sw_ref(&nbvg->nbl_lists,
+                     nbvg->nbat, ic,
+                     fr->shift_vec,
+                     flags,
+                     clearF,
+                     fr->fshift[0],
+                     enerd->grpp.ener[egCOULSR],
+                     fr->bBHAM ?
+                     enerd->grpp.ener[egBHAMSR] :
+                     enerd->grpp.ener[egLJSR]);
+
+    /* Switch to SunWay here
+    switch (nbvg->kernel_type) {
         case nbnxnk4x4_PlainC:
             nbnxn_kernel_ref(&nbvg->nbl_lists,
                              nbvg->nbat, ic,
@@ -548,7 +561,7 @@ static void do_nb_verlet(t_forcerec *fr,
         default:
             gmx_incons("Invalid nonbonded kernel type passed!");
 
-    }
+    } */
     if (!bUsingGpuKernels)
     {
         wallcycle_sub_stop(wcycle, ewcsNONBONDED);
