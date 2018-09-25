@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cd ~/zhaocg/gromacs-5.1.5/build
+cd ~/zhaocg/build
 make -j48

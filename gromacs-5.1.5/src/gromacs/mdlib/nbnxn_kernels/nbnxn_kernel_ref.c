@@ -190,6 +190,9 @@ nbnxn_kernel_ref(const nbnxn_pairlist_set_t *nbl_list,
     nnbl = nbl_list->nnbl;
     nbl  = nbl_list->nbl;
 
+    int counters[128], vvi;
+    for(vvi = 0; vvi < 128; ++ vvi) counters[vvi] = 0;
+
     if (EEL_RF(ic->eeltype) || ic->eeltype == eelCUT)
     {
         coult = coultRF;
@@ -254,25 +257,30 @@ nbnxn_kernel_ref(const nbnxn_pairlist_set_t *nbl_list,
 
         if (clearF == enbvClearFYes)
         {
+            counters[0] ++;
             clear_f(nbat, nb, out->f);
         }
 
         if ((force_flags & GMX_FORCE_VIRIAL) && nnbl == 1)
         {
+            counters[1] ++;
             fshift_p = fshift;
         }
         else
         {
             fshift_p = out->fshift;
+            counters[2] ++;
 
             if (clearF == enbvClearFYes)
             {
+                counters[3] ++;
                 clear_fshift(fshift_p);
             }
         }
 
         if (!(force_flags & GMX_FORCE_ENERGY))
         {
+            counters[4] ++;
             /* Don't calculate energies */
             p_nbk_c_noener[coult][vdwt](nbl[nb], nbat,
                                         ic,
@@ -286,6 +294,7 @@ nbnxn_kernel_ref(const nbnxn_pairlist_set_t *nbl_list,
             out->Vvdw[0] = 0;
             out->Vc[0]   = 0;
 
+            counters[5] ++;
             p_nbk_c_ener[coult][vdwt](nbl[nb], nbat,
                                       ic,
                                       shift_vec,
@@ -298,7 +307,7 @@ nbnxn_kernel_ref(const nbnxn_pairlist_set_t *nbl_list,
         {
             /* Calculate energy group contributions */
             int i;
-
+            counters[6] ++;
             for (i = 0; i < out->nV; i++)
             {
                 out->Vvdw[i] = 0;
@@ -320,6 +329,12 @@ nbnxn_kernel_ref(const nbnxn_pairlist_set_t *nbl_list,
 
     if (force_flags & GMX_FORCE_ENERGY)
     {
+        counters[7] ++;
         reduce_energies_over_lists(nbat, nnbl, Vvdw, Vc);
+    }
+
+    if(nnbl > 1) {
+      printf("kernel call end! nnbl = %d, coult = %d, vdwt = %d, force_flags = %d, clearF = %d\n", nnbl, coult, vdwt, force_flags, clearF);
+      printf("counters = (%d, %d, %d, %d, %d, %d, %d, %d) \n\n", counters[0], counters[1], counters[2], counters[3], counters[4], counters[5], counters[6], counters[7], counters[8]);
     }
 }

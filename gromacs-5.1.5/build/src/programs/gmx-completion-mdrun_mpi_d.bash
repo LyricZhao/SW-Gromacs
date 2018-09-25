@@ -1,1 +1,0 @@
-complete -o nospace -F _gmx_mdrun_compl mdrun_mpi_d
