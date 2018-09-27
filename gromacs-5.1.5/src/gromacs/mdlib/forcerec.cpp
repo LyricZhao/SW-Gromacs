@@ -1858,8 +1858,9 @@ static void pick_nbnxn_resources(FILE                *fp,
      * if mdrun is compiled without GPU acceleration support.
      * Note that you should freezing the system as otherwise it will explode.
      */
-    *bEmulateGPU = (bEmulateGPUEnvVarSet ||
-                    (!bDoNonbonded && gpu_opt->n_dev_use > 0));
+
+    // *bEmulateGPU = (bEmulateGPUEnvVarSet || (!bDoNonbonded && gpu_opt->n_dev_use > 0));
+    *bEmulateGPU = TRUE;
 
     /* Enable GPU mode when GPUs are available or no GPU emulation is requested.
      */

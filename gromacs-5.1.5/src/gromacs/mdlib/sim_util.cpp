@@ -486,20 +486,6 @@ static void do_nb_verlet(t_forcerec *fr,
         wallcycle_sub_start(wcycle, ewcsNONBONDED);
     }
 
-    /* SunWay Kernel */
-    /*
-    nbnxn_kernel_sw_ref(&nbvg->nbl_lists,
-                     nbvg->nbat, ic,
-                     fr->shift_vec,
-                     flags,
-                     clearF,
-                     fr->fshift[0],
-                     enerd->grpp.ener[egCOULSR],
-                     fr->bBHAM ?
-                     enerd->grpp.ener[egBHAMSR] :
-                     enerd->grpp.ener[egLJSR]);
-    */
-
     /* Switch to SunWay here */
     switch (nbvg->kernel_type) {
         case nbnxnk4x4_PlainC:
@@ -547,6 +533,7 @@ static void do_nb_verlet(t_forcerec *fr,
             break;
 
         case nbnxnk8x8x8_PlainC:
+            /* fake gpu -> sw kernel */
             nbnxn_kernel_gpu_ref(nbvg->nbl_lists.nbl[0],
                                  nbvg->nbat, ic,
                                  fr->shift_vec,
