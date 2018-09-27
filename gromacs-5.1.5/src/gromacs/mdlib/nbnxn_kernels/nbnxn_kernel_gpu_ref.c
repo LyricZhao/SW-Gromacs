@@ -1,21 +1,25 @@
-#include "gmxpre.h"
-#include "nbnxn_kernel_gpu_ref.h"
-#include "config.h"
+# include "gmxpre.h"
+# include "nbnxn_kernel_gpu_ref.h"
+# include "config.h"
 
-#include <math.h>
+# include <math.h>
 
-#include "gromacs/legacyheaders/force.h"
-#include "gromacs/legacyheaders/typedefs.h"
-#include "gromacs/legacyheaders/types/simple.h"
-#include "gromacs/math/utilities.h"
-#include "gromacs/math/vec.h"
-#include "gromacs/mdlib/nb_verlet.h"
-#include "gromacs/mdlib/nbnxn_consts.h"
-#include "gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h"
-#include "gromacs/pbcutil/ishift.h"
+# include "gromacs/legacyheaders/force.h"
+# include "gromacs/legacyheaders/typedefs.h"
+# include "gromacs/legacyheaders/types/simple.h"
+# include "gromacs/math/utilities.h"
+# include "gromacs/math/vec.h"
+# include "gromacs/mdlib/nb_verlet.h"
+# include "gromacs/mdlib/nbnxn_consts.h"
+# include "gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h"
+# include "gromacs/pbcutil/ishift.h"
+
+# include "athread.h"
 
 # define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
 # define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
+
+extern SLAVE_FUN(sw_computing_core)();
 
 void
 nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
@@ -43,7 +47,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     int                 ci, cj;
     int                 ic, jc, ia, ja, is, ifs, js, jfs, im, jm;
     int                 n0;
-    int                 ggid;
     real                shX, shY, shZ;
     real                fscal, tx, ty, tz;
     real                rinvsq;
@@ -67,9 +70,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     int       *         type;
     const nbnxn_excl_t *excl[2];
 
-    int                 npair_tot, npair;
-    int                 nhwu, nhwu_pruned;
-
     if (clearF == enbvClearFYes) clear_f(nbat, 0, f);
 
     bEner = (force_flags & GMX_FORCE_ENERGY);
@@ -87,9 +87,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     ntype               = nbat->ntype;
 
     x = nbat->x;
-    npair_tot   = 0;
-    nhwu        = 0;
-    nhwu_pruned = 0;
 
     for (n = 0; n < nbl->nsci; n++) { // nsci changes (1 to 64)
 
@@ -122,16 +119,15 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
             excl[0] = &nbl->excl[nbl->cj4[cj4_ind].imei[0].excl_ind];
             excl[1] = &nbl->excl[nbl->cj4[cj4_ind].imei[1].excl_ind];
 
+            /* kernel starts here */
             for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) { // NBNXN_GPU_JGROUP_SIZE = 4
+
                 cj = nbl->cj4[cj4_ind].cj[jm];
 
                 for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
                     if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
-                        gmx_bool within_rlist;
-                        ci               = sci*NCL_PER_SUPERCL + im;
-                        within_rlist     = FALSE;
-                        npair            = 0;
+                        ci               = sci * NCL_PER_SUPERCL + im;
 
                         for (ic = 0; ic < CL_SIZE; ic++) { // CL_SIZE = 8
 
@@ -148,6 +144,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                             fiz              = 0;
 
                             for (jc = 0; jc < CL_SIZE; jc++) { // CL_SIZE = 8
+                                /* core computing */
 
                                 ja               = cj*CL_SIZE + jc;
                                 if (nbln->shift == CENTRAL && ci == cj && ja <= ia) continue;
@@ -162,12 +159,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                                 dy               = iy - jy;
                                 dz               = iz - jz;
                                 rsq              = dx*dx + dy*dy + dz*dz;
-                                if(rsq < rlist2) within_rlist = TRUE;
                                 if (rsq >= rcut2) continue;
 
-                                if (type[ia] != ntype-1 && type[ja] != ntype-1) npair++;
-
-                                /* avoid NaN for excluded pairs at r=0 */
+                                // avoid NaN for excluded pairs at r=0
                                 rsq             += (1.0 - int_bit)*NBNXN_AVOID_SING_R2_INC;
 
                                 rinv             = gmx_invsqrt(rsq);
@@ -176,7 +170,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
                                 qq               = iq*x[js+3];
                                 if (!bEwald) {
-                                    /* Reaction-field */
+                                    // Reaction-field
                                     krsq  = iconst->k_rf*rsq;
                                     fscal = qq*(int_bit*rinv - 2*krsq)*rinvsq;
                                     if (bEner) vcoul = qq*(int_bit*rinv + krsq - iconst->c_rf);
@@ -193,7 +187,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                                 if (rsq < rvdw2) {
                                     tj        = nti + 2*type[ja];
 
-                                    /* Vanilla Lennard-Jones cutoff */
+                                    // Vanilla Lennard-Jones cutoff
                                     c6        = vdwparam[tj];
                                     c12       = vdwparam[tj+1];
 
@@ -227,17 +221,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                             fshift[ish3]     = fshift[ish3]   + fix;
                             fshift[ish3+1]   = fshift[ish3+1] + fiy;
                             fshift[ish3+2]   = fshift[ish3+2] + fiz;
-
-                            /* Count in half work-units.
-                             * In CUDA one work-unit is 2 warps.
-                             */
-                            if ((ic+1) % (CL_SIZE/2) == 0) {
-                                npair_tot += npair;
-                                nhwu++;
-                                if (within_rlist) nhwu_pruned++;
-                                within_rlist = FALSE;
-                                npair        = 0;
-                            }
                         }
                     }
                 }
@@ -245,9 +228,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
         }
 
         if (bEner) {
-            ggid             = 0;
-            Vc[ggid]         = Vc[ggid]   + vctot;
-            Vvdw[ggid]       = Vvdw[ggid] + Vvdwtot;
+            Vc[0]         = Vc[0]   + vctot;
+            Vvdw[0]       = Vvdw[0] + Vvdwtot;
         }
     }
 }
