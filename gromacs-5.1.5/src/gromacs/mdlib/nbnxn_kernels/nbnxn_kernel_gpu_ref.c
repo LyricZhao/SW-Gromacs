@@ -108,7 +108,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     nhwu        = 0;
     nhwu_pruned = 0;
 
-    for (n = 0; n < nbl->nsci; n++)
+    for (n = 0; n < nbl->nsci; n++) // nsci changes (1 to 64)
     {
         nbln = &nbl->sci[n];
 
@@ -154,11 +154,11 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
             excl[0]           = &nbl->excl[nbl->cj4[cj4_ind].imei[0].excl_ind];
             excl[1]           = &nbl->excl[nbl->cj4[cj4_ind].imei[1].excl_ind];
 
-            for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++)
+            for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) // NBNXN_GPU_JGROUP_SIZE = 4
             {
                 cj               = nbl->cj4[cj4_ind].cj[jm];
 
-                for (im = 0; im < NCL_PER_SUPERCL; im++)
+                for (im = 0; im < NCL_PER_SUPERCL; im++) // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
                 {
                     /* We're only using the first imask,
                      * but here imei[1].imask is identical.
@@ -171,7 +171,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
                         within_rlist     = FALSE;
                         npair            = 0;
-                        for (ic = 0; ic < CL_SIZE; ic++)
+                        for (ic = 0; ic < CL_SIZE; ic++) // CL_SIZE = 8
                         {
                             ia               = ci*CL_SIZE + ic;
 
@@ -187,7 +187,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                             fiy              = 0;
                             fiz              = 0;
 
-                            for (jc = 0; jc < CL_SIZE; jc++)
+                            for (jc = 0; jc < CL_SIZE; jc++) // CL_SIZE = 8
                             {
                                 ja               = cj*CL_SIZE + jc;
 
