@@ -1,7 +1,5 @@
 #include "gmxpre.h"
-
 #include "nbnxn_kernel_gpu_ref.h"
-
 #include "config.h"
 
 #include <math.h>
@@ -16,8 +14,8 @@
 #include "gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h"
 #include "gromacs/pbcutil/ishift.h"
 
-#define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
-#define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
+# define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
+# define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
 
 void
 nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
@@ -29,8 +27,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                      real  *                     f,
                      real  *                     fshift,
                      real  *                     Vc,
-                     real  *                     Vvdw)
-{
+                     real  *                     Vvdw) {
     const nbnxn_sci_t  *nbln;
     const real         *x;
     gmx_bool            bEner;
@@ -73,29 +70,16 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     int                 npair_tot, npair;
     int                 nhwu, nhwu_pruned;
 
-    if (nbl->na_ci != CL_SIZE)
-    {
-        gmx_fatal(FARGS, "The neighborlist cluster size in the GPU reference kernel is %d, expected it to be %d", nbl->na_ci, CL_SIZE);
-    }
-
-    if (clearF == enbvClearFYes)
-    {
-        clear_f(nbat, 0, f);
-    }
+    if (clearF == enbvClearFYes) clear_f(nbat, 0, f);
 
     bEner = (force_flags & GMX_FORCE_ENERGY);
 
     bEwald = EEL_FULL(iconst->eeltype);
-    if (bEwald)
-    {
-        Ftab = iconst->tabq_coul_F;
-    }
+    if (bEwald) Ftab = iconst->tabq_coul_F;
 
     rcut2               = iconst->rcoulomb*iconst->rcoulomb;
     rvdw2               = iconst->rvdw*iconst->rvdw;
-
     rlist2              = nbl->rlist*nbl->rlist;
-
     type                = nbat->type;
     facel               = iconst->epsfac;
     shiftvec            = shift_vec[0];
@@ -103,15 +87,13 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     ntype               = nbat->ntype;
 
     x = nbat->x;
-
     npair_tot   = 0;
     nhwu        = 0;
     nhwu_pruned = 0;
 
-    for (n = 0; n < nbl->nsci; n++) // nsci changes (1 to 64)
-    {
-        nbln = &nbl->sci[n];
+    for (n = 0; n < nbl->nsci; n++) { // nsci changes (1 to 64)
 
+        nbln = &nbl->sci[n];
         ish3             = 3*nbln->shift;
         shX              = shiftvec[ish3];
         shY              = shiftvec[ish3+1];
@@ -122,59 +104,38 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
         vctot            = 0;
         Vvdwtot          = 0;
 
-        if (nbln->shift == CENTRAL &&
-            nbl->cj4[cj4_ind0].cj[0] == sci*NCL_PER_SUPERCL)
-        {
-            /* we have the diagonal:
-             * add the charge self interaction energy term
-             */
-            for (im = 0; im < NCL_PER_SUPERCL; im++)
-            {
+        if (nbln->shift == CENTRAL && nbl->cj4[cj4_ind0].cj[0] == sci*NCL_PER_SUPERCL) {
+            for (im = 0; im < NCL_PER_SUPERCL; im++) {
                 ci = sci*NCL_PER_SUPERCL + im;
-                for (ic = 0; ic < CL_SIZE; ic++)
-                {
-                    ia     = ci*CL_SIZE + ic;
-                    iq     = x[ia*nbat->xstride+3];
+                for (ic = 0; ic < CL_SIZE; ic++) {
+                    ia = ci*CL_SIZE + ic;
+                    iq = x[ia*nbat->xstride+3];
                     vctot += iq*iq;
                 }
             }
-            if (!bEwald)
-            {
-                vctot *= -facel*0.5*iconst->c_rf;
-            }
-            else
-            {
-                /* last factor 1/sqrt(pi) */
-                vctot *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
-            }
+            if (!bEwald) vctot *= -facel*0.5*iconst->c_rf;
+            else vctot *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
         }
 
-        for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++)
-        {
-            excl[0]           = &nbl->excl[nbl->cj4[cj4_ind].imei[0].excl_ind];
-            excl[1]           = &nbl->excl[nbl->cj4[cj4_ind].imei[1].excl_ind];
+        for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
 
-            for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) // NBNXN_GPU_JGROUP_SIZE = 4
-            {
-                cj               = nbl->cj4[cj4_ind].cj[jm];
+            excl[0] = &nbl->excl[nbl->cj4[cj4_ind].imei[0].excl_ind];
+            excl[1] = &nbl->excl[nbl->cj4[cj4_ind].imei[1].excl_ind];
 
-                for (im = 0; im < NCL_PER_SUPERCL; im++) // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
-                {
-                    /* We're only using the first imask,
-                     * but here imei[1].imask is identical.
-                     */
-                    if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1)
-                    {
+            for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) { // NBNXN_GPU_JGROUP_SIZE = 4
+                cj = nbl->cj4[cj4_ind].cj[jm];
+
+                for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
+                    if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
+
                         gmx_bool within_rlist;
-
                         ci               = sci*NCL_PER_SUPERCL + im;
-
                         within_rlist     = FALSE;
                         npair            = 0;
-                        for (ic = 0; ic < CL_SIZE; ic++) // CL_SIZE = 8
-                        {
-                            ia               = ci*CL_SIZE + ic;
 
+                        for (ic = 0; ic < CL_SIZE; ic++) { // CL_SIZE = 8
+
+                            ia               = ci*CL_SIZE + ic;
                             is               = ia*nbat->xstride;
                             ifs              = ia*nbat->fstride;
                             ix               = shX + x[is+0];
@@ -182,21 +143,14 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                             iz               = shZ + x[is+2];
                             iq               = facel*x[is+3];
                             nti              = ntype*2*type[ia];
-
                             fix              = 0;
                             fiy              = 0;
                             fiz              = 0;
 
-                            for (jc = 0; jc < CL_SIZE; jc++) // CL_SIZE = 8
-                            {
+                            for (jc = 0; jc < CL_SIZE; jc++) { // CL_SIZE = 8
+
                                 ja               = cj*CL_SIZE + jc;
-
-                                if (nbln->shift == CENTRAL &&
-                                    ci == cj && ja <= ia)
-                                {
-                                    continue;
-                                }
-
+                                if (nbln->shift == CENTRAL && ci == cj && ja <= ia) continue;
                                 int_bit = ((excl[jc>>2]->pair[(jc & 3)*CL_SIZE+ic] >> (jm*NCL_PER_SUPERCL+im)) & 1);
 
                                 js               = ja*nbat->xstride;
@@ -208,57 +162,35 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                                 dy               = iy - jy;
                                 dz               = iz - jz;
                                 rsq              = dx*dx + dy*dy + dz*dz;
-                                if (rsq < rlist2)
-                                {
-                                    within_rlist = TRUE;
-                                }
-                                if (rsq >= rcut2)
-                                {
-                                    continue;
-                                }
+                                if(rsq < rlist2) within_rlist = TRUE;
+                                if (rsq >= rcut2) continue;
 
-                                if (type[ia] != ntype-1 && type[ja] != ntype-1)
-                                {
-                                    npair++;
-                                }
+                                if (type[ia] != ntype-1 && type[ja] != ntype-1) npair++;
 
                                 /* avoid NaN for excluded pairs at r=0 */
                                 rsq             += (1.0 - int_bit)*NBNXN_AVOID_SING_R2_INC;
 
                                 rinv             = gmx_invsqrt(rsq);
-                                rinvsq           = rinv*rinv;
+                                rinvsq           = rinv * rinv;
                                 fscal            = 0;
 
                                 qq               = iq*x[js+3];
-                                if (!bEwald)
-                                {
+                                if (!bEwald) {
                                     /* Reaction-field */
                                     krsq  = iconst->k_rf*rsq;
                                     fscal = qq*(int_bit*rinv - 2*krsq)*rinvsq;
-                                    if (bEner)
-                                    {
-                                        vcoul = qq*(int_bit*rinv + krsq - iconst->c_rf);
-                                    }
+                                    if (bEner) vcoul = qq*(int_bit*rinv + krsq - iconst->c_rf);
                                 }
-                                else
-                                {
+                                else {
                                     r     = rsq*rinv;
                                     rt    = r*iconst->tabq_scale;
                                     n0    = rt;
                                     eps   = rt - n0;
-
                                     fexcl = (1 - eps)*Ftab[n0] + eps*Ftab[n0+1];
-
                                     fscal = qq*(int_bit*rinvsq - fexcl)*rinv;
-
-                                    if (bEner)
-                                    {
-                                        vcoul = qq*((int_bit - gmx_erf(iconst->ewaldcoeff_q*r))*rinv - int_bit*iconst->sh_ewald);
-                                    }
+                                    if (bEner) vcoul = qq*((int_bit - gmx_erf(iconst->ewaldcoeff_q*r))*rinv - int_bit*iconst->sh_ewald);
                                 }
-
-                                if (rsq < rvdw2)
-                                {
+                                if (rsq < rvdw2) {
                                     tj        = nti + 2*type[ja];
 
                                     /* Vanilla Lennard-Jones cutoff */
@@ -270,10 +202,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                                     Vvdw_rep  = c12*rinvsix*rinvsix;
                                     fscal    += (Vvdw_rep - Vvdw_disp)*rinvsq;
 
-                                    if (bEner)
-                                    {
+                                    if (bEner) {
                                         vctot   += vcoul;
-
                                         Vvdwtot +=
                                             (Vvdw_rep - int_bit*c12*iconst->sh_invrc6*iconst->sh_invrc6)/12 -
                                             (Vvdw_disp - int_bit*c6*iconst->sh_invrc6)/6;
@@ -301,16 +231,10 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                             /* Count in half work-units.
                              * In CUDA one work-unit is 2 warps.
                              */
-                            if ((ic+1) % (CL_SIZE/2) == 0)
-                            {
+                            if ((ic+1) % (CL_SIZE/2) == 0) {
                                 npair_tot += npair;
-
                                 nhwu++;
-                                if (within_rlist)
-                                {
-                                    nhwu_pruned++;
-                                }
-
+                                if (within_rlist) nhwu_pruned++;
                                 within_rlist = FALSE;
                                 npair        = 0;
                             }
@@ -320,8 +244,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
             }
         }
 
-        if (bEner)
-        {
+        if (bEner) {
             ggid             = 0;
             Vc[ggid]         = Vc[ggid]   + vctot;
             Vvdw[ggid]       = Vvdw[ggid] + Vvdwtot;
