@@ -1,4 +1,15 @@
-void sw_computing_core(long *paras) {
+/* SW Slave Computing Kernel */
+
+# include "slave.h"
+
+/* Thread */
+__thread_kernel("compute") int threadID;
+__thread_kernel("compute") tMPI_Spinlock_t* para_pass_lock, thread_lock;
+__thread_kernel("compute") int* isEnd;
+
+static void real_computing_core() {
+  vctot_0 = 0;
+  Vvdwtot_0 = 0;
   for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
       if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
@@ -19,6 +30,7 @@ void sw_computing_core(long *paras) {
               fiz              = 0;
 
               for (jc = 0; jc < CL_SIZE; jc++) { // CL_SIZE = 8
+                  /* core computing */
 
                   ja               = cj*CL_SIZE + jc;
                   if (nbln->shift == CENTRAL && ci == cj && ja <= ia) continue;
@@ -71,8 +83,8 @@ void sw_computing_core(long *paras) {
                       fscal    += (Vvdw_rep - Vvdw_disp)*rinvsq;
 
                       if (bEner) {
-                          vctot   += vcoul;
-                          Vvdwtot +=
+                          vctot_0   += vcoul;
+                          Vvdwtot_0 +=
                               (Vvdw_rep - int_bit*c12*iconst->sh_invrc6*iconst->sh_invrc6)/12 -
                               (Vvdw_disp - int_bit*c6*iconst->sh_invrc6)/6;
                       }
@@ -98,4 +110,15 @@ void sw_computing_core(long *paras) {
           }
       }
   }
+}
+
+static inline void setParas(long *paras) {
+  threadID = athread_get_id(-1);
+  thread_lock = &(((tMPI_Spinlock_t *) paras[0])[threadID]);
+  para_pass_lock = (tMPI_Spinlock_t *) paras[1];
+  isEnd = (int *) paras[2];
+}
+
+void sw_computing_core(long *paras) {
+  setParas(paras);
 }

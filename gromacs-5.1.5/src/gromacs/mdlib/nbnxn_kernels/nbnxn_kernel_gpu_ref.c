@@ -19,7 +19,15 @@
 # define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
 # define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
 
+# define vc_max 128
+# define thread_max 64
+
 extern SLAVE_FUN(sw_computing_core)();
+
+tMPI_Spinlock_t bEner_lock[vc_max];
+tMPI_Spinlock_t thread_lock[thread_max];
+tMPI_Spinlock_t para_pass_lock;
+int isEnd, my_looper;
 
 void
 nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
@@ -45,29 +53,15 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     int                 sci;
     int                 cj4_ind0, cj4_ind1, cj4_ind;
     int                 ci, cj;
-    int                 ic, jc, ia, ja, is, ifs, js, jfs, im, jm;
-    int                 n0;
+    int                 ic, ia, im, jm;
     real                shX, shY, shZ;
-    real                fscal, tx, ty, tz;
-    real                rinvsq;
     real                iq;
-    real                qq, vcoul = 0, krsq, vctot;
-    int                 nti;
-    int                 tj;
-    real                rt, r, eps;
-    real                rinvsix;
-    real                Vvdwtot;
-    real                Vvdw_rep, Vvdw_disp;
-    real                ix, iy, iz, fix, fiy, fiz;
-    real                jx, jy, jz;
-    real                dx, dy, dz, rsq, rinv;
-    int                 int_bit;
-    real                fexcl;
-    real                c6, c12, cexp1, cexp2, br;
-    const real       *  shiftvec;
-    real       *        vdwparam;
-    int       *         shift;
-    int       *         type;
+    real                vctot[vc_max];
+    real                Vvdwtot[vc_max];
+    const real         *shiftvec;
+    real               *vdwparam;
+    int                *shift;
+    int                *type;
     const nbnxn_excl_t *excl[2];
 
     if (clearF == enbvClearFYes) clear_f(nbat, 0, f);
@@ -88,7 +82,18 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
     x = nbat->x;
 
+    long paras_array[2] = {(long) thread_lock, (long) &para_pass_lock, (long) &isEnd};
+    isEnd = 0;
+    tMPI_Spinlock_init(&para_pass_lock);
+    for(my_looper = 0; my_looper < thread_max; ++ my_looper) {
+      tMPI_Spinlock_init(&thread_lock[my_looper]);
+    }
+    athread_spawn64(SLAVE_FUN(sw_computing_core), &paras_array);
+    assert(nbl -> nsci < vc_max);
+
     for (n = 0; n < nbl->nsci; n++) { // nsci changes (1 to 64)
+
+        tMPI_Spinlock_init(&bEner_lock[n]);
 
         nbln = &nbl->sci[n];
         ish3             = 3*nbln->shift;
@@ -98,8 +103,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
         cj4_ind0         = nbln->cj4_ind_start;
         cj4_ind1         = nbln->cj4_ind_end;
         sci              = nbln->sci;
-        vctot            = 0;
-        Vvdwtot          = 0;
+        vctot[n]         = 0;
+        Vvdwtot[n]       = 0;
 
         if (nbln->shift == CENTRAL && nbl->cj4[cj4_ind0].cj[0] == sci*NCL_PER_SUPERCL) {
             for (im = 0; im < NCL_PER_SUPERCL; im++) {
@@ -107,11 +112,11 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                 for (ic = 0; ic < CL_SIZE; ic++) {
                     ia = ci*CL_SIZE + ic;
                     iq = x[ia*nbat->xstride+3];
-                    vctot += iq*iq;
+                    vctot[n] += iq*iq;
                 }
             }
-            if (!bEwald) vctot *= -facel*0.5*iconst->c_rf;
-            else vctot *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
+            if (!bEwald) vctot[n] *= -facel*0.5*iconst->c_rf;
+            else vctot[n] *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
         }
 
         for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
@@ -123,15 +128,31 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
                 cj = nbl->cj4[cj4_ind].cj[jm];
 
-                /* using sw thread pool here */
-                
-                /* sw slave function call */
+                /* load task in the thread pool */
+                while(true) {
+                  for(my_looper = 0; my_looper < thread_max; ++ my_looper) {
+                    if(tMPI_Spinlock_islocked(&thread_lock[my_looper]) == 0) {
+                      /* found, pass and break */
+                      tMPI_Spinlock_lock(&thread_lock[my_looper]);
+                      tMPI_Spinlock_lock(&para_pass_lock);
+
+                      while(tMPI_Spinlock_islocked(&para_pass_lock));
+                      goto wd_done;
+                    }
+                  }
+                }
+                wd_done: /* nothing, next task */
             }
         }
+    }
 
-        if (bEner) {
-            Vc[0]         = Vc[0]   + vctot;
-            Vvdw[0]       = Vvdw[0] + Vvdwtot;
-        }
+    isEnd = 1;
+    athread_join64();
+
+    if(bEner) {
+      for (n = 0; n < nbl->nsci; n++) {
+        Vc[0]         = Vc[0]   + vctot[n];
+        Vvdw[0]       = Vvdw[0] + Vvdwtot[n];
+      }
     }
 }
