@@ -15,6 +15,7 @@
 # include "gromacs/pbcutil/ishift.h"
 
 # include "athread.h"
+# include "spinlock.h"
 
 # define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
 # define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
@@ -82,7 +83,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
     x = nbat->x;
 
-    long paras_array[2] = {(long) thread_lock, (long) &para_pass_lock, (long) &isEnd};
+    long paras_package[26];
+    long paras_array[4] = {(long) thread_lock, (long) &para_pass_lock, (long) &isEnd, (long) paras_package};
     isEnd = 0;
     tMPI_Spinlock_init(&para_pass_lock);
     for(my_looper = 0; my_looper < thread_max; ++ my_looper) {
@@ -134,6 +136,20 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     if(tMPI_Spinlock_islocked(&thread_lock[my_looper]) == 0) {
                       /* found, pass and break */
                       tMPI_Spinlock_lock(&thread_lock[my_looper]);
+
+                      paras_package[0] = (long) nbl -> cj4[cj4_ind].imei[0].imask;
+                      paras_package[1] = (long) jm; paras_package[2] = (long) sci; paras_package[3] = shX; paras_package[4] = shY; paras_package[5] = shZ;
+                      paras_package[6] = (long) ntype; paras_package[7] = (long) cj; paras_package[8] = (long) (nbat -> xstride); paras_package[9] = (long) (nbat -> fstride);
+                      paras_package[10] = (long) facel; paras_package[11] = (long) rcut2; paras_package[12] = (long) rvdw2;
+                      paras_package[13] = (long) type;
+                      paras_package[14] = (long) excl;
+                      paras_package[15] = (long) bEwald; paras_package[16] = (long) bEner;
+                      paras_package[17] = (long) iconst;
+                      paras_package[18] = (long) Ftab; paras_package[19] = (long) x;
+                      paras_package[20] = (long) vdwparam; paras_package[21] = (long) f; paras_package[22] = (long) fshift;
+                      paras_package[23] = (long) &vctot[n]; paras_package[24] = (long) &Vvdwtot[n];
+                      paras_package[25] = (long) &bEner_lock[n];
+                      paras_package[26] = (long) nbln -> shift;
                       tMPI_Spinlock_lock(&para_pass_lock);
 
                       while(tMPI_Spinlock_islocked(&para_pass_lock));
