@@ -120,7 +120,7 @@ static void real_computing_core() {
                       eps   = rt - n0;
                       fexcl = (1 - eps)*Ftab[n0] + eps*Ftab[n0+1];
                       fscal = qq*(int_bit*rinvsq - fexcl)*rinv;
-                      if (bEner) vcoul = qq*((int_bit - gmx_erf(iconst->ewaldcoeff_q*r))*rinv - int_bit*iconst->sh_ewald);
+                      if (bEner) vcoul = qq*((int_bit - (float)(iconst->ewaldcoeff_q*r))*rinv - int_bit*iconst->sh_ewald);
                   }
                   if (rsq < rvdw2) {
                       tj        = nti + 2*type[ja];

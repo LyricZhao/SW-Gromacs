@@ -42,9 +42,3 @@ static inline int tMPI_Spinlock_islocked(tMPI_Spinlock_t *x) {
     __sync_synchronize();
     return ( x->lock == 1 );
 }
-
-static inline void tMPI_Spinlock_wait(tMPI_Spinlock_t *x) {
-    do { }
-    while (x->lock == 1);
-    __sync_synchronize();
-}
