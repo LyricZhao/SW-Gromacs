@@ -14,12 +14,12 @@
 # include "gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h"
 # include "gromacs/pbcutil/ishift.h"
 
-# include "athread.h"
+// # include "athread.h"
 
 # define NCL_PER_SUPERCL         (NBNXN_GPU_NCLUSTER_PER_SUPERCLUSTER)
 # define CL_SIZE                 (NBNXN_GPU_CLUSTER_SIZE)
 
-extern SLAVE_FUN(sw_computing_core)();
+// extern SLAVE_FUN(sw_computing_core)();
 
 void
 nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
