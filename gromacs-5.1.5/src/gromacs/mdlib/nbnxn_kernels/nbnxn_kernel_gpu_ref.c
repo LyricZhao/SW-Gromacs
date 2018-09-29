@@ -3,6 +3,7 @@
 # include "config.h"
 
 # include <math.h>
+# include <assert.h>
 
 # include "gromacs/legacyheaders/force.h"
 # include "gromacs/legacyheaders/typedefs.h"
@@ -45,9 +46,11 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
     /* Calling Kernel */
     long paras[9] = {(long) nbl, (long) nbat, (long) iconst, (long) shift_vec, (long) force_flags, (long) f, (long) fshift, (long) vctot, (long) Vvdwtot};
-    athread_spawn64(SLAVE_FUN(sw_computing_core), paras);
+    athread_spawn64(SLAVE_FUN(sw_computing_core), &paras);
     athread_join64();
 
+
+    gmx_bool bEner = (force_flags & GMX_FORCE_ENERGY);
     /* Reduce */
     if(bEner) {
       int n;

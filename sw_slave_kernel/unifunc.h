@@ -3,7 +3,7 @@
 # define M_1_SQRTPI 0.564189583547756
 
 /** Exponential lookup table - 256 floats */
-__thread_kernel("compute") const unsigned int gmx_invsqrt_exptab[256] = {
+__thread_local_fix const unsigned int gmx_invsqrt_exptab_my[256] = {
     0x5f000000, 0x5e800000, 0x5e800000, 0x5e000000,
     0x5e000000, 0x5d800000, 0x5d800000, 0x5d000000,
     0x5d000000, 0x5c800000, 0x5c800000, 0x5c000000,
@@ -71,7 +71,7 @@ __thread_kernel("compute") const unsigned int gmx_invsqrt_exptab[256] = {
 };
 
 /** Mantissa lookup table - 4096 floats */
-__thread_kernel("compute") const unsigned int gmx_invsqrt_fracttab[4096] = {
+__thread_local_fix const unsigned int gmx_invsqrt_fracttab_my[4096] = {
     0x3504f3, 0x34f9a4, 0x34ee57, 0x34e30c, 0x34d7c3, 0x34cc7c, 0x34c137, 0x34b5f5,
     0x34aab4, 0x349f76, 0x34943a, 0x348900, 0x347dc7, 0x347291, 0x34675e, 0x345c2c,
     0x3450fc, 0x3445ce, 0x343aa3, 0x342f79, 0x342452, 0x34192c, 0x340e09, 0x3402e8,
@@ -615,7 +615,7 @@ static gmx_inline real gmx_software_invsqrt(real x) {
     bit_pattern.fval = x;
     exp              = EXP_ADDR(bit_pattern.bval);
     fract            = FRACT_ADDR(bit_pattern.bval);
-    result.bval      = gmx_invsqrt_exptab[exp] | gmx_invsqrt_fracttab[fract];
+    result.bval      = gmx_invsqrt_exptab_my[exp] | gmx_invsqrt_fracttab_my[fract];
     lu               = result.fval;
 
     y = (half*lu*(three-((x*lu)*lu)));

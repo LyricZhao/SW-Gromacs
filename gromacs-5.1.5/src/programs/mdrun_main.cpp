@@ -2,24 +2,18 @@
 # include "gromacs/commandline/cmdlinemodulemanager.h"
 # include "mdrun/mdrun_main.h"
 
-# define USE_VIC_OPT
-
-# ifdef USE_VIC_OPT
 # include "athread.h"
-# endif
+
+extern "C" {
+  void athread_INIT();
+  void athread_LEAVE();
+}
 
 int main(int argc, char *argv[]) {
-# ifdef USE_VIC_OPT
-    athread_init();
-    athread_enter64();
-# endif
-
+  
+    athread_INIT();
     int ret = gmx::CommandLineModuleManager::runAsMainCMain(argc, argv, &gmx_mdrun);
-
-# ifdef USE_VIC_OPT
-    athread_leave64();
-    athread_halt();
-# endif
+    athread_LEAVE();
 
     return ret;
 }
