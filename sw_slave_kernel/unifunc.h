@@ -1,4 +1,7 @@
+# include "slave.h"
 # include "config.h"
+
+# include <math.h>
 
 # define M_1_SQRTPI 0.564189583547756
 

@@ -1,4 +1,5 @@
 /* SW Slave Computing Kernel */
+
 # include "gmxpre.h"
 # include "nbnxn_kernel_gpu_ref.h"
 # include "config.h"
@@ -68,12 +69,11 @@ void sw_computing_core(long *paras) {
   real                fscal, tx, ty, tz;
   real                rinvsq;
   real                iq;
-  real                qq, vcoul = 0, krsq, vctot;
+  real                qq, vcoul = 0, krsq;
   int                 nti;
   int                 tj;
   real                rt, r, eps;
   real                rinvsix;
-  real                Vvdwtot;
   real                Vvdw_rep, Vvdw_disp;
   real                ix, iy, iz, fix, fiy, fiz;
   real                jx, jy, jz;
@@ -112,8 +112,8 @@ void sw_computing_core(long *paras) {
     cj4_ind0         = nbln->cj4_ind_start;
     cj4_ind1         = nbln->cj4_ind_end;
     sci              = nbln->sci;
-    vctot            = 0;
-    Vvdwtot          = 0;
+    vctot[n]         = 0;
+    Vvdwtot[n]       = 0;
 
     if (nbln->shift == CENTRAL && nbl->cj4[cj4_ind0].cj[0] == sci*NCL_PER_SUPERCL) {
         for (im = 0; im < NCL_PER_SUPERCL; im++) {
@@ -121,11 +121,11 @@ void sw_computing_core(long *paras) {
             for (ic = 0; ic < CL_SIZE; ic++) {
                 ia = ci*CL_SIZE + ic;
                 iq = x[ia*nbat->xstride+3];
-                vctot += iq*iq;
+                vctot[n] += iq*iq;
             }
         }
-        if (!bEwald) vctot *= -facel*0.5*iconst->c_rf;
-        else vctot *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
+        if (!bEwald) vctot[n] *= -facel*0.5*iconst->c_rf;
+        else vctot[n] *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
     }
 
     for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
@@ -210,8 +210,8 @@ void sw_computing_core(long *paras) {
                                 fscal    += (Vvdw_rep - Vvdw_disp)*rinvsq;
 
                                 if (bEner) {
-                                    vctot   += vcoul;
-                                    Vvdwtot +=
+                                    vctot[n]   += vcoul;
+                                    Vvdwtot[n] +=
                                         (Vvdw_rep - int_bit*c12*iconst->sh_invrc6*iconst->sh_invrc6)/12 -
                                         (Vvdw_disp - int_bit*c6*iconst->sh_invrc6)/6;
                                 }
