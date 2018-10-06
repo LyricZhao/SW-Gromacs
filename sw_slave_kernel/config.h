@@ -48,7 +48,7 @@
 /*! \cond */
 
 /* IEEE754 floating-point format. Memory layout is defined by macros
- * GMX_IEEE754_BIG_ENDIAN_BYTE_ORDER and GMX_IEEE754_BIG_ENDIAN_WORD_ORDER.
+ * GMX_IEEE754_BIG_ENDIAN_BYTE_ORDER and GMX_IEEE754_BIG_ENDIAN_WORD_ORDER. 
  */
 #define GMX_FLOAT_FORMAT_IEEE754
 
@@ -123,7 +123,7 @@
 
 /* IBM VSX was selected as SIMD instructions (Power 7 and later) */
 /* #undef GMX_SIMD_IBM_VSX */
-
+ 
 /* Fujitsu Sparc64 HPC-ACE SIMD acceleration */
 /* #undef GMX_SIMD_SPARC64_HPC_ACE */
 
@@ -134,7 +134,7 @@
 #define GMX_SIMD_STRING "NONE"
 
 /* Calling convention string (if any) for routines with SIMD variable args */
-#define gmx_simdcall
+#define gmx_simdcall 
 
 /* Target mantissa accuracy for SIMD single precision math */
 #define GMX_SIMD_ACCURACY_BITS_SINGLE 22

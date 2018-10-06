@@ -10,7 +10,7 @@ extern "C" {
 }
 
 int main(int argc, char *argv[]) {
-  
+
     athread_INIT();
     int ret = gmx::CommandLineModuleManager::runAsMainCMain(argc, argv, &gmx_mdrun);
     athread_LEAVE();
