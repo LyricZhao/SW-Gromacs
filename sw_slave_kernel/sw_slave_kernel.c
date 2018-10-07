@@ -29,13 +29,17 @@
 
 # define THREAD_TOT 64
 
-__thread_kernel("compute") real vdwparam[2] __attribute__((aligned(32)));
-__thread_kernel("compute") real vctot[384], Vvdwtot[384] __attribute__((aligned(32)));
-__thread_kernel("compute") real Ftab[2] __attribute__((aligned(32)));
-__thread_kernel("compute") real xii[256], fii[256] __attribute__((aligned(32)));
-__thread_kernel("compute") real xjj[256], fjj[256] __attribute__((aligned(32)));
-__thread_kernel("compute") int typeii[8], typejj[8] __attribute__((aligned(32)));
-__thread_kernel("compute") void *tempPtr __attribute__((aligned(32)));
+__thread_local real fshift[3] __attribute__((aligned(32)));
+__thread_local real shXYZ[3] __attribute__((aligned(32)));
+__thread_local unsigned int imask __attribute__((aligned(32)));
+__thread_local unsigned int excl_pair[2][32] __attribute__((aligned(32)));
+__thread_local real vdwparam[2] __attribute__((aligned(32)));
+__thread_local real vctot[384], Vvdwtot[384] __attribute__((aligned(32)));
+__thread_local real Ftab[2] __attribute__((aligned(32)));
+__thread_local real xii[256], fii[256] __attribute__((aligned(32)));
+__thread_local real xjj[256], fjj[256] __attribute__((aligned(32)));
+__thread_local int typeii[8], typejj[8] __attribute__((aligned(32)));
+__thread_local void *tempPtr __attribute__((aligned(32)));
 
 static void cpe_printf(const char *fmt, ...){
   volatile long vprintf_addr = (long)vprintf;
@@ -46,18 +50,17 @@ static void cpe_printf(const char *fmt, ...){
   va_end(vlist);
 }
 
-static inline void getTrans(void *useless, void *dest_cpe, int siz) {
+static inline void getTrans(void *dest_cpe, int siz) {
   volatile int getReply = 0;
   athread_get(PE_MODE, tempPtr, dest_cpe, siz, (void*) &getReply, 0, 0, 0);
-  while(getReply != 1);
   tempPtr += siz;
+  while(getReply != 1);
 }
 
 static inline void getAll(void *src_mpe, void *dest_cpe, int siz) {
   volatile int getReply = 0;
   athread_get(PE_MODE, src_mpe, dest_cpe, siz, (void*) &getReply, 0, 0, 0);
   while(getReply != 1);
-  tempPtr += siz;
 }
 
 static inline void setP(void *src, void *dest) {
@@ -82,7 +85,7 @@ void sw_computing_core(char *paras) {
   long long_vdwparam_size, long_Ftab_size;
   real k_rf, c_rf, tabq_scale, ewaldcoeff_q, sh_ewald, sh_invrc6, facel;
 
-  setP((void *) &paras[ 1 * 8], (void *) &(tempPtr));
+  setP((void *) &paras[ 1 * 8], (void *) &(startPoint_addr));
   setP((void *) &paras[ 2 * 8], (void *) &(long_nbat_xstride));
   setP((void *) &paras[ 3 * 8], (void *) &(long_nbat_fstride));
   setP((void *) &paras[ 4 * 8], (void *) &(long_ntype));
@@ -99,59 +102,62 @@ void sw_computing_core(char *paras) {
   setP((void *) &paras[15 * 8], (void *) &(sh_ewald));
   setP((void *) &paras[16 * 8], (void *) &(sh_invrc6));
   setP((void *) &paras[17 * 8], (void *) &(facel));
+  getAll((void *) &startPoint_addr[threadST], (void *) &tempPtr, sizeof(void *));
   nbat_xstride = long_nbat_xstride; nbat_fstride = long_nbat_fstride; ntype = long_ntype;
 
   /* Temp Vars */
   int n, sci, cj, im, ic, ia, ish3, jm, is, ifs, ja, jfs, jc, int_bit, n0, nti, js, ci, tj;
-  real shX, shY, shZ, ix, iy, iz, fix, fiy, fiz, jx, jy, jz, dx, dy, dz, rsq, rinv, eps, rt, r, qq, c6, c12, cexp1, cexp2, rinvsix, Vvdw_rep, Vvdw_disp, iq, rinvsq, fscal, fexcl, tx, ty, tz;
+  real ix, iy, iz, fix, fiy, fiz, jx, jy, jz, dx, dy, dz, rsq, rinv, eps, rt, r, qq, c6, c12, cexp1, cexp2, rinvsix, Vvdw_rep, Vvdw_disp, iq, rinvsq, fscal, fexcl, tx, ty, tz;
 
   /* Attributes */
-  real vcoul = 0, fshift[3];
-  int cj4_ind, cj4_ind0, cj4_ind1;
-  nbnxn_sci_t nbln;
-  unsigned int excl_pair[2][32], imask;
+  real vcoul = 0;
+  int cj4_ind, cj4_ind0, cj4_ind1, rshift;
 
+  // cpe_printf("cpe_start_addr = %p\n", tempPtr);
+  // cpe_printf("cqq: %d %d %d %d %lf %lf\n", nsci, nbat_xstride, nbat_fstride, ntype, rcut2, rvdw2);
   for(n = threadST; n < threadED; ++ n) {
-
-    getTrans(tempPtr, &nbln, sizeof(nbnxn_sci_t));
-    cj4_ind0         = nbln.cj4_ind_start;
-    cj4_ind1         = nbln.cj4_ind_end;
-    sci              = nbln.sci;
-    ish3             = nbln.shift * 3;
-    getTrans(tempPtr, (void *) &shX, sizeof(real));
-    getTrans(tempPtr, (void *) &shY, sizeof(real));
-    getTrans(tempPtr, (void *) &shZ, sizeof(real));
+    getTrans(&ish3, sizeof(int));
+    getTrans(&cj4_ind0, sizeof(int));
+    getTrans(&cj4_ind1, sizeof(int));
+    getTrans(&sci, sizeof(int));
+    rshift = ish3 / 3;
+    // cpe_printf("cpe %d %d %d %d\n", cj4_ind0, cj4_ind1, sci, ish3);
+    getTrans((void *) shXYZ, sizeof(real) * 3);
+    // cpe_printf("cpe shift %.2lf %.2lf %.2lf\n", shXYZ[0], shXYZ[1], shXYZ[2]);
     fshift[0] = fshift[1] = fshift[2] = 0;
 
     for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
 
-      getTrans(tempPtr, (void *) excl_pair[0], 32 * sizeof(unsigned int));
-      getTrans(tempPtr, (void *) excl_pair[1], 32 * sizeof(unsigned int));
-      getTrans(tempPtr, (void *) &imask, sizeof(unsigned int));
+      getTrans((void *) &(excl_pair[0][0]), 64 * sizeof(unsigned int));
+      getTrans((void *) &imask, sizeof(unsigned int));
+      // cpe_printf("imask cpe: %d %u\n", cj4_ind, imask);
 
       for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) {
 
-        getTrans(tempPtr, (void *) &cj, sizeof(int));
+        getTrans((void *) &cj, sizeof(int));
+        // cpe_printf("cpe cj = %d\n", cj);
 
         for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
           if ((imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
-            /* 8KB Here */
-            getTrans(tempPtr, (void *) xii, (7 * CL_SIZE * nbat_xstride + 4) * sizeof(real));
-            getTrans(tempPtr, (void *) typeii, 8 * sizeof(int));
-            getTrans(tempPtr, (void *) fii, (7 * CL_SIZE * nbat_fstride + 3) * sizeof(real));
+            ci = sci * NCL_PER_SUPERCL + im;
 
-            getTrans(tempPtr, (void *) xjj, (7 * CL_SIZE * nbat_xstride + 4) * sizeof(real));
-            getTrans(tempPtr, (void *) typejj, 8 * sizeof(int));
-            getTrans(tempPtr, (void *) fjj, (7 * CL_SIZE * nbat_fstride + 3) * sizeof(real));
+            /* 8KB Here */
+            getTrans((void *) xii, (7 * nbat_xstride + 4) * sizeof(real));
+            getTrans((void *) typeii, 8 * sizeof(int));
+            getTrans((void *) fii, (7 * nbat_fstride + 3) * sizeof(real));
+
+            getTrans((void *) xjj, (7 * nbat_xstride + 4) * sizeof(real));
+            getTrans((void *) typejj, 8 * sizeof(int));
+            getTrans((void *) fjj, (7 * nbat_fstride + 3) * sizeof(real));
 
             for (ic = 0; ic < CL_SIZE; ic++) { // CL_SIZE = 8
               ia               = ic;
               is               = ia*nbat_xstride;
               ifs              = ia*nbat_fstride;
-              ix               = shX + xii[is+0];
-              iy               = shY + xii[is+1];
-              iz               = shZ + xii[is+2];
+              ix               = shXYZ[0] + xii[is+0];
+              iy               = shXYZ[1] + xii[is+1];
+              iz               = shXYZ[2] + xii[is+2];
               iq               = facel*xii[is+3];
               nti              = ntype*2*typeii[ia];
               fix              = 0;
@@ -160,8 +166,8 @@ void sw_computing_core(char *paras) {
 
               for (jc = 0; jc < CL_SIZE; jc++) { // CL_SIZE = 8
 
-                  ja               = cj*CL_SIZE + jc;
-                  if (nbln.shift == CENTRAL && ci == cj && ja + cj * CL_SIZE <= ia + ci * CL_SIZE) continue;
+                  ja               = jc;
+                  if (rshift == CENTRAL && ci == cj && ja + cj * CL_SIZE <= ia + ci * CL_SIZE) continue;
                   int_bit = ((excl_pair[jc>>2][(jc & 3)*CL_SIZE+ic] >> (jm*NCL_PER_SUPERCL+im)) & 1);
 
                   js               = ja*nbat_xstride;

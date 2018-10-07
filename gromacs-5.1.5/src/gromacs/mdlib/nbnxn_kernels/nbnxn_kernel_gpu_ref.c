@@ -24,19 +24,31 @@
 
 extern void slave_sw_computing_core();
 
+# define buffer_size (256 * 1024 * 1024) // 256MB
+
 void *tempPtrG;
-int ttsize = 0;
+int first_time_run = 0, ttsize;
 
 static inline void setP(void *dest, void *pa) {
-  memcpy(dest, pa, 4);
+  memcpy(dest, pa, 8);
 }
 
 static inline void addTrans(void* useless, void* src, int siz) {
   ttsize += siz;
-  assert(ttsize < 8 * 1024 * 1024);
+  // assert(ttsize < buffer_size);
+  if(ttsize > buffer_size) {
+    printf("!!!!!!");
+    fflush(stdout);
+    while(1);
+    assert(0);
+  }
   memcpy(tempPtrG, src, siz);
   tempPtrG += siz;
 }
+
+char *transferData;
+real *vctotCopy, *VvdwtotCopy, *vdwparamCopy, *FtabCopy;
+void **startPoint;
 
 void
 nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
@@ -52,12 +64,13 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
 
     /* Variables Init */
+    ttsize = 0;
     if (clearF == enbvClearFYes) clear_f(nbat, 0, f);
 
     /* Global */
     gmx_bool bEner = (force_flags & GMX_FORCE_ENERGY);
-    const real *x = nbat->x;
-    const nbnxn_excl_t *excl[2];
+    real *x = nbat->x;
+    nbnxn_excl_t *excl[2];
 
     /* Attributes */
     const nbnxn_sci_t *nbln;
@@ -67,26 +80,34 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     real rvdw2 = iconst->rvdw*iconst->rvdw;
     int *type = nbat->type;
 
+    /* Array */
+    if(first_time_run == 0) {
+      transferData = (char *) malloc(buffer_size);
+      vctotCopy = (real *) malloc(sizeof(real) * 512);
+      VvdwtotCopy = (real *) malloc(sizeof(real) * 512);
+      startPoint = (void *) malloc(sizeof(void *) * 512);
+      vdwparamCopy = (real *) malloc(4096 * sizeof(real));
+      FtabCopy = (real *) malloc(4096 * sizeof(real));
+      first_time_run = 1;
+    }
+
+    /* Global Data */
+    int vdwparam_size = nbat->ntype * nbat->ntype * 2 * sizeof(real);
+    memcpy((void *) vdwparamCopy, (void *) nbat->nbfp, vdwparam_size);
+    int Ftab_size = iconst->tabq_size * sizeof(real);
+    memcpy((void *) FtabCopy, (void *) iconst->tabq_coul_F, Ftab_size);
+
     /* Temp Vars */
     int im, ci, ic, ia, jm, cj;
     int is, ifs, js, jfs;
     real iq, facel = iconst->epsfac;
 
     /* Loop Buffer Data */
-    void *transferData = malloc(8 * 1024 * 1024); tempPtrG = transferData; /* 8MB */
+    tempPtrG = transferData; /* 8KB */
 
-    /* Global Data */
-    int vdwparam_size = nbat->ntype * nbat->ntype * 2 * sizeof(real);
-    real *vdwparam = (real *) malloc(vdwparam_size);
-    memcpy((void *) vdwparam, (void *)nbat->nbfp, vdwparam_size);
-    int Ftab_size = iconst->tabq_size * sizeof(real);
-    real *Ftab = (real *) malloc(Ftab_size);
-    memcpy((void *) Ftab, (void *) iconst->tabq_coul_F, Ftab_size);
-
-    real *vctot = (real *) malloc(sizeof(real) * nbl->nsci);
-    real *Vvdwtot = (real *) malloc(sizeof(real) * nbl->nsci);
     real *shiftvec = shift_vec[0];
 
+    // printf("mpe_start_addr = %p\n", transferData);
     for (n = 0; n < nbl->nsci; n++) {
         nbln = &nbl->sci[n];
         ish3             = 3*nbln->shift;
@@ -96,10 +117,17 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
         cj4_ind0         = nbln->cj4_ind_start;
         cj4_ind1         = nbln->cj4_ind_end;
         sci              = nbln->sci;
-        vctot[n]         = 0;
-        Vvdwtot[n]       = 0;
-        addTrans(tempPtrG, (void *) nbln, sizeof(nbnxn_sci_t));
+        vctotCopy[n]         = 0;
+        VvdwtotCopy[n]       = 0;
+        startPoint[n] = tempPtrG;
+        addTrans(tempPtrG, (void *) &ish3, sizeof(int));
+        addTrans(tempPtrG, (void *) &cj4_ind0, sizeof(int));
+        addTrans(tempPtrG, (void *) &cj4_ind1, sizeof(int));
+        addTrans(tempPtrG, (void *) &sci, sizeof(int));
         addTrans(tempPtrG, (void *) &shiftvec[ish3], sizeof(real) * 3);
+        // printf("?? mpe: n = %d %d %d %.2lf %.2lf %.2lf\n", n, cj4_ind0, cj4_ind1, shX, shY, shZ);
+        // int *ppp = (int *) startPoint[n];
+        // printf("^^ %p %d %d %d %d\n", ppp, ppp[0], ppp[1], ppp[2], ppp[3]);
 
         /* MPE Works */
         if (nbln->shift == CENTRAL && nbl->cj4[cj4_ind0].cj[0] == sci*NCL_PER_SUPERCL) {
@@ -108,10 +136,10 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                 for (ic = 0; ic < CL_SIZE; ic++) {
                     ia = ci*CL_SIZE + ic;
                     iq = x[ia*nbat->xstride+3];
-                    vctot[n] += iq*iq;
+                    vctotCopy[n] += iq*iq;
                 }
             }
-            vctot[n] *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
+            vctotCopy[n] *= -facel*iconst->ewaldcoeff_q*M_1_SQRTPI;
         }
 
         /* Data Package */
@@ -120,31 +148,33 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
             excl[0] = &nbl->excl[nbl->cj4[cj4_ind].imei[0].excl_ind];
             excl[1] = &nbl->excl[nbl->cj4[cj4_ind].imei[1].excl_ind];
 
-            addTrans(tempPtrG, (void *) excl[0]->pair, 32 * sizeof(unsigned int));
-            addTrans(tempPtrG, (void *) excl[1]->pair, 32 * sizeof(unsigned int));
+            addTrans(tempPtrG, (void *) &(excl[0]->pair[0]), 32 * sizeof(unsigned int));
+            addTrans(tempPtrG, (void *) &(excl[1]->pair[0]), 32 * sizeof(unsigned int));
             addTrans(tempPtrG, (void *) &(nbl->cj4[cj4_ind].imei[0].imask), sizeof(unsigned int));
+
+            // printf("imask mpe: %d %u\n", cj4_ind, nbl->cj4[cj4_ind].imei[0].imask);
 
             /* kernel starts here */
             for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) { // NBNXN_GPU_JGROUP_SIZE = 4
 
                 cj = nbl->cj4[cj4_ind].cj[jm];
+                // printf("mpe cj = %d\n", cj);
                 addTrans(tempPtrG, (void *) &cj, sizeof(int));
 
-                continue;
                 for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
                     if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
                         ci = sci * NCL_PER_SUPERCL + im;
 
                         /* ic: 0 to 8 */
-                        addTrans(tempPtrG, (void *) &x[(ci * CL_SIZE) * nbat->xstride], (7 * CL_SIZE * nbat->xstride + 4) * sizeof(real));
+                        addTrans(tempPtrG, (void *) &x[(ci * CL_SIZE) * nbat->xstride], (7 * nbat->xstride + 4) * sizeof(real));
                         addTrans(tempPtrG, (void *) &type[ci * CL_SIZE], 8 * sizeof(int));
-                        addTrans(tempPtrG, (void *) &f[(ci * CL_SIZE) * nbat->fstride], (7 * CL_SIZE * nbat->fstride + 3) * sizeof(real));
+                        addTrans(tempPtrG, (void *) &f[(ci * CL_SIZE) * nbat->fstride], (7 * nbat->fstride + 3) * sizeof(real));
 
                         /* jc: 0 to 8 */
-                        addTrans(tempPtrG, (void *) &x[(cj * CL_SIZE) * nbat->xstride], (7 * CL_SIZE * nbat->xstride + 4) * sizeof(real));
+                        addTrans(tempPtrG, (void *) &x[(cj * CL_SIZE) * nbat->xstride], (7 * nbat->xstride + 4) * sizeof(real));
                         addTrans(tempPtrG, (void *) &type[cj * CL_SIZE], 8 * sizeof(int));
-                        addTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], (7 * CL_SIZE * nbat->fstride + 3 )* sizeof(real));
+                        addTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], (7 * nbat->fstride + 3 )* sizeof(real));
                     }
                 }
             }
@@ -156,19 +186,22 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     long long_nfstride = nbat->fstride;
     long long_ntype = nbat->ntype;
 
+    void **bsp = startPoint;
+
     /* Calling Kernel */
     char paras[18 * 8];
+    // printf("immmp: %d %d %d %d %lf %lf\n", nbl->nsci, nbat->xstride, nbat->fstride, nbat->ntype, rcut2, rvdw2);
     setP((void *) &paras[ 0 * 8], (void *) &(long_nsci));
-    setP((void *) &paras[ 1 * 8], (void *) &(transferData));
+    setP((void *) &paras[ 1 * 8], (void *) &(bsp));
     setP((void *) &paras[ 2 * 8], (void *) &(long_nxstride));
     setP((void *) &paras[ 3 * 8], (void *) &(long_nfstride));
     setP((void *) &paras[ 4 * 8], (void *) &(long_ntype));
     setP((void *) &paras[ 5 * 8], (void *) &(rcut2));
     setP((void *) &paras[ 6 * 8], (void *) &(rvdw2));
-    setP((void *) &paras[ 7 * 8], (void *) &(vctot));
-    setP((void *) &paras[ 8 * 8], (void *) &(Vvdwtot));
-    setP((void *) &paras[ 9 * 8], (void *) &(vdwparam));
-    setP((void *) &paras[10 * 8], (void *) &(iconst->tabq_coul_F));
+    setP((void *) &paras[ 7 * 8], (void *) &(vctotCopy));
+    setP((void *) &paras[ 8 * 8], (void *) &(VvdwtotCopy));
+    setP((void *) &paras[ 9 * 8], (void *) &(vdwparamCopy));
+    setP((void *) &paras[10 * 8], (void *) &(FtabCopy));
     setP((void *) &paras[11 * 8], (void *) &(iconst->k_rf));
     setP((void *) &paras[12 * 8], (void *) &(iconst->c_rf));
     setP((void *) &paras[13 * 8], (void *) &(iconst->tabq_scale));
@@ -177,10 +210,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     setP((void *) &paras[16 * 8], (void *) &(iconst->sh_invrc6));
     setP((void *) &paras[17 * 8], (void *) &(iconst->epsfac));
 
-
     athread_spawn(sw_computing_core, &paras);
     athread_join();
-    while(1);
 
 /*
 # ifndef LYRIC_DEBUG
@@ -194,9 +225,4 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     }
 # endif
 */
-    free(transferData);
-    free(vdwparam);
-    free(Ftab);
-    free(vctot);
-    free(Vvdwtot);
 }
