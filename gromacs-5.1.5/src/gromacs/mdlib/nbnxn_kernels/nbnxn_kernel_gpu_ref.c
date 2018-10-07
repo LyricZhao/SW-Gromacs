@@ -25,12 +25,15 @@
 extern void slave_sw_computing_core();
 
 void *tempPtrG;
+int ttsize = 0;
 
 static inline void setP(void *dest, void *pa) {
   memcpy(dest, pa, 4);
 }
 
 static inline void addTrans(void* useless, void* src, int siz) {
+  ttsize += siz;
+  assert(ttsize < 8 * 1024 * 1024);
   memcpy(tempPtrG, src, siz);
   tempPtrG += siz;
 }
@@ -46,6 +49,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                      real  *                     fshift,
                      real  *                     Vc,
                      real  *                     Vvdw) {
+
 
     /* Variables Init */
     if (clearF == enbvClearFYes) clear_f(nbat, 0, f);
@@ -69,7 +73,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     real iq, facel = iconst->epsfac;
 
     /* Loop Buffer Data */
-    void *transferData = malloc(64 * 1024); tempPtrG = transferData;
+    void *transferData = malloc(8 * 1024 * 1024); tempPtrG = transferData; /* 8MB */
 
     /* Global Data */
     int vdwparam_size = nbat->ntype * nbat->ntype * 2 * sizeof(real);
@@ -118,7 +122,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
 
             addTrans(tempPtrG, (void *) excl[0]->pair, 32 * sizeof(unsigned int));
             addTrans(tempPtrG, (void *) excl[1]->pair, 32 * sizeof(unsigned int));
-            addTrans(tempPtrG, (void *) &nbl->cj4[cj4_ind].imei[0].imask, sizeof(unsigned int));
+            addTrans(tempPtrG, (void *) &(nbl->cj4[cj4_ind].imei[0].imask), sizeof(unsigned int));
 
             /* kernel starts here */
             for (jm = 0; jm < NBNXN_GPU_JGROUP_SIZE; jm++) { // NBNXN_GPU_JGROUP_SIZE = 4
@@ -126,20 +130,21 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                 cj = nbl->cj4[cj4_ind].cj[jm];
                 addTrans(tempPtrG, (void *) &cj, sizeof(int));
 
+                continue;
                 for (im = 0; im < NCL_PER_SUPERCL; im++) { // NCL_PER_SUPERCL = 2 * 2 * 2 = 8
                     if ((nbl->cj4[cj4_ind].imei[0].imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
                         ci = sci * NCL_PER_SUPERCL + im;
 
                         /* ic: 0 to 8 */
-                        addTrans(tempPtrG, (void *) &x[(ci * CL_SIZE) * nbat->xstride], 8 * CL_SIZE * nbat->xstride * sizeof(real));
+                        addTrans(tempPtrG, (void *) &x[(ci * CL_SIZE) * nbat->xstride], (7 * CL_SIZE * nbat->xstride + 4) * sizeof(real));
                         addTrans(tempPtrG, (void *) &type[ci * CL_SIZE], 8 * sizeof(int));
-                        addTrans(tempPtrG, (void *) &f[(ci * CL_SIZE) * nbat->fstride], 8 * CL_SIZE * nbat->fstride * sizeof(real));
+                        addTrans(tempPtrG, (void *) &f[(ci * CL_SIZE) * nbat->fstride], (7 * CL_SIZE * nbat->fstride + 3) * sizeof(real));
 
                         /* jc: 0 to 8 */
-                        addTrans(tempPtrG, (void *) &x[(cj * CL_SIZE) * nbat->xstride], 8 * CL_SIZE * nbat->xstride * sizeof(real));
+                        addTrans(tempPtrG, (void *) &x[(cj * CL_SIZE) * nbat->xstride], (7 * CL_SIZE * nbat->xstride + 4) * sizeof(real));
                         addTrans(tempPtrG, (void *) &type[cj * CL_SIZE], 8 * sizeof(int));
-                        addTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], 8 * CL_SIZE * nbat->fstride * sizeof(real));
+                        addTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], (7 * CL_SIZE * nbat->fstride + 3 )* sizeof(real));
                     }
                 }
             }
@@ -150,6 +155,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     long long_nxstride = nbat->xstride;
     long long_nfstride = nbat->fstride;
     long long_ntype = nbat->ntype;
+
     /* Calling Kernel */
     char paras[18 * 8];
     setP((void *) &paras[ 0 * 8], (void *) &(long_nsci));
@@ -171,13 +177,14 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     setP((void *) &paras[16 * 8], (void *) &(iconst->sh_invrc6));
     setP((void *) &paras[17 * 8], (void *) &(iconst->epsfac));
 
-    // athread_spawn(sw_computing_core, &paras);
-    // athread_join();
-    // while(1);
 
+    athread_spawn(sw_computing_core, &paras);
+    athread_join();
+    while(1);
+
+/*
 # ifndef LYRIC_DEBUG
     gmx_bool bEner = (force_flags & GMX_FORCE_ENERGY);
-    /* Reduce */
     if(bEner) {
       int n;
       for (n = 0; n < nbl->nsci; n++) {
@@ -186,9 +193,10 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
       }
     }
 # endif
-    free(Vvdwtot);
-    free(vctot);
+*/
     free(transferData);
-    free(Ftab);
     free(vdwparam);
+    free(Ftab);
+    free(vctot);
+    free(Vvdwtot);
 }

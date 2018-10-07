@@ -123,7 +123,6 @@ void sw_computing_core(char *paras) {
     getTrans(tempPtr, (void *) &shZ, sizeof(real));
     fshift[0] = fshift[1] = fshift[2] = 0;
 
-
     for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
 
       getTrans(tempPtr, (void *) excl_pair[0], 32 * sizeof(unsigned int));
@@ -138,13 +137,13 @@ void sw_computing_core(char *paras) {
           if ((imask >> (jm*NCL_PER_SUPERCL+im)) & 1) {
 
             /* 8KB Here */
-            getTrans(tempPtr, (void *) xii, 8 * CL_SIZE * nbat_xstride * sizeof(real));
+            getTrans(tempPtr, (void *) xii, (7 * CL_SIZE * nbat_xstride + 4) * sizeof(real));
             getTrans(tempPtr, (void *) typeii, 8 * sizeof(int));
-            getTrans(tempPtr, (void *) fii, 8 * CL_SIZE * nbat_fstride * sizeof(real));
+            getTrans(tempPtr, (void *) fii, (7 * CL_SIZE * nbat_fstride + 3) * sizeof(real));
 
-            getTrans(tempPtr, (void *) xjj, 8 * CL_SIZE * nbat_xstride * sizeof(real));
+            getTrans(tempPtr, (void *) xjj, (7 * CL_SIZE * nbat_xstride + 4) * sizeof(real));
             getTrans(tempPtr, (void *) typejj, 8 * sizeof(int));
-            getTrans(tempPtr, (void *) fjj, 8 * CL_SIZE * nbat_fstride * sizeof(real));
+            getTrans(tempPtr, (void *) fjj, (7 * CL_SIZE * nbat_fstride + 3) * sizeof(real));
 
             for (ic = 0; ic < CL_SIZE; ic++) { // CL_SIZE = 8
               ia               = ic;
