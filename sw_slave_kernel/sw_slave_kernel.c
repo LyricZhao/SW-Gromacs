@@ -86,8 +86,7 @@ void sw_computing_core(char *paras) {
   long long_nbat_xstride, long_nbat_fstride, long_ntype;
   real rcut2, rvdw2;
   real *vctot_addr, *Vvdwtot_addr, *vdwparam_addr, *Ftab_addr, *fshift_addr;
-  int vdwparam_size, Ftab_size;
-  long long_vdwparam_size, long_Ftab_size, bEner;
+  long bEner;
   real k_rf, c_rf, tabq_scale, ewaldcoeff_q, sh_ewald, sh_invrc6, facel;
 
   setP((void *) &paras[ 1 * 8], (void *) &(startPoint_addr));
@@ -134,7 +133,9 @@ void sw_computing_core(char *paras) {
     // cpe_printf("cpe %d %d %d %d\n", cj4_ind0, cj4_ind1, sci, ish3);
     getTrans((void *) shXYZ, sizeof(real) * 3);
     // cpe_printf("cpe shift %.2lf %.2lf %.2lf\n", shXYZ[0], shXYZ[1], shXYZ[2]);
-    fshift[0] = fshift[1] = fshift[2] = 0;
+    fshift[0] = 0;
+    fshift[1] = 0;
+    fshift[2] = 0;
 
     for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
 
@@ -179,7 +180,7 @@ void sw_computing_core(char *paras) {
               for (jc = 0; jc < CL_SIZE; jc++) { // CL_SIZE = 8
 
                   ja               = jc;
-                  if (rshift == CENTRAL && ci == cj && ja + cj * CL_SIZE <= ia + ci * CL_SIZE) continue;
+                  if (rshift == CENTRAL && ci == cj && ((ja + cj * CL_SIZE) <= (ia + ci * CL_SIZE))) continue;
                   int_bit = ((excl_pair[jc>>2][(jc & 3)*CL_SIZE+ic] >> (jm*NCL_PER_SUPERCL+im)) & 1);
 
                   js               = ja*nbat_xstride;
@@ -258,10 +259,10 @@ void sw_computing_core(char *paras) {
     } /* cj4_Loop */
     /* put fshift back */
     /* put vv0, vv1 back */
-    athread_put(PE_MODE, (void *) fshift, (void *) &fshift_addr[n * 3], sizeof(real) * 3, (void *) &putback_reply, 0, 0);
+    athread_put(PE_MODE, (void *) &fshift[0], (void *) &fshift_addr[n * 3], sizeof(real) * 3, (void *) &putback_reply, 0, 0);
     athread_put(PE_MODE, (void *) &vv0, (void *) &vctot_addr[n], sizeof(real), (void *) &putback_reply, 0, 0);
     athread_put(PE_MODE, (void *) &vv1, (void *) &Vvdwtot_addr[n], sizeof(real), (void *) &putback_reply, 0, 0);
     putback_counter += 3;
+    while(putback_reply != putback_counter);
   }
-  while(putback_reply != putback_counter);
 }

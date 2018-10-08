@@ -74,7 +74,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     real rvdw2 = iconst->rvdw*iconst->rvdw;
     int *type = nbat->type;
     gmx_bool bEner;
-    gmx_bool bEwald;
     bEner = (force_flags & GMX_FORCE_ENERGY);
 
     /* Array */
@@ -217,13 +216,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     if(bEner) {
 
       for (n = 0; n < nbl->nsci; n++) {
-        nbln = &nbl->sci[n];
-        ish3             = 3*nbln->shift;
-        fshift[ish3 + 0] += fshift_sum[n * 3 + 0];
-        fshift[ish3 + 1] += fshift_sum[n * 3 + 1];
-        fshift[ish3 + 2] += fshift_sum[n * 3 + 2];
         Vc[0]         = Vc[0]   + vctotCopy[n];
         Vvdw[0]       = Vvdw[0] + VvdwtotCopy[n];
+        // if(n == 0) printf("%.3lf %.3lf %.3lf\n", fshift[ish3+0], fshift[ish3+1], fshift[ish3+2]);
       }
     }
 
@@ -233,6 +228,10 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
       cj4_ind0         = nbln->cj4_ind_start;
       cj4_ind1         = nbln->cj4_ind_end;
       sci              = nbln->sci;
+      ish3             = 3*nbln->shift;
+      fshift[ish3 + 0] += fshift_sum[n * 3 + 0];
+      fshift[ish3 + 1] += fshift_sum[n * 3 + 1];
+      fshift[ish3 + 2] += fshift_sum[n * 3 + 2];
       tempPtrG += 4 * sizeof(int) + 3 * sizeof(real);
       for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
           tempPtrG += 65 * sizeof(unsigned int);
@@ -251,9 +250,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     for(ic = 0; ic < 8; ++ ic) {
                       ia = ci * CL_SIZE + ic;
                       ifs = ia*nbat->fstride;
-                      f[ifs+0] += iip[ic*nbat->fstride];
-                      f[ifs+1] += iip[ic*nbat->fstride];
-                      f[ifs+2] += iip[ic*nbat->fstride];
+                      f[ifs+0] += iip[ic*nbat->fstride+0];
+                      f[ifs+1] += iip[ic*nbat->fstride+1];
+                      f[ifs+2] += iip[ic*nbat->fstride+2];
                     }
                     tempPtrG += (7 * nbat->fstride + 3) * sizeof(real);
 
@@ -263,9 +262,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     for(jc = 0; jc < 8; ++ jc) {
                       ja = cj * CL_SIZE + jc;
                       jfs = ja*nbat->fstride;
-                      f[jfs+0] += iip[jc*nbat->fstride];
-                      f[jfs+1] += iip[jc*nbat->fstride];
-                      f[jfs+2] += iip[jc*nbat->fstride];
+                      f[jfs+0] += iip[jc*nbat->fstride+0];
+                      f[jfs+1] += iip[jc*nbat->fstride+1];
+                      f[jfs+2] += iip[jc*nbat->fstride+2];
                     }
                     tempPtrG += (7 * nbat->fstride + 3) * sizeof(real);
                 }
