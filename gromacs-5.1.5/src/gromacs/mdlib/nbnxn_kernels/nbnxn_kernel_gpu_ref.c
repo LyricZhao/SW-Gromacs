@@ -262,9 +262,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     for(jc = 0; jc < 8; ++ jc) {
                       ja = cj * CL_SIZE + jc;
                       jfs = ja*nbat->fstride;
-                      f[jfs+0] += iip[jc*nbat->fstride+0];
-                      f[jfs+1] += iip[jc*nbat->fstride+1];
-                      f[jfs+2] += iip[jc*nbat->fstride+2];
+                      f[jfs+0] += jjp[jc*nbat->fstride+0];
+                      f[jfs+1] += jjp[jc*nbat->fstride+1];
+                      f[jfs+2] += jjp[jc*nbat->fstride+2];
                     }
                     tempPtrG += (7 * nbat->fstride + 3) * sizeof(real);
                 }
