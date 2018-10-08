@@ -57,6 +57,11 @@ static inline void getTrans(void *dest_cpe, int siz) {
   while(getReply != 1);
 }
 
+static inline void fakTrans(void *dest_cpe, int siz) {
+  memset(dest_cpe, 0, siz);
+  tempPtr += siz;
+}
+
 static inline void getAll(void *src_mpe, void *dest_cpe, int siz) {
   volatile int getReply = 0;
   athread_get(PE_MODE, src_mpe, dest_cpe, siz, (void*) &getReply, 0, 0, 0);
@@ -80,9 +85,9 @@ void sw_computing_core(char *paras) {
   int nbat_xstride, nbat_fstride, ntype;
   long long_nbat_xstride, long_nbat_fstride, long_ntype;
   real rcut2, rvdw2;
-  real *vctot_addr, *Vvdwtot_addr, *vdwparam_addr, *Ftab_addr;
+  real *vctot_addr, *Vvdwtot_addr, *vdwparam_addr, *Ftab_addr, *fshift_addr;
   int vdwparam_size, Ftab_size;
-  long long_vdwparam_size, long_Ftab_size;
+  long long_vdwparam_size, long_Ftab_size, bEner;
   real k_rf, c_rf, tabq_scale, ewaldcoeff_q, sh_ewald, sh_invrc6, facel;
 
   setP((void *) &paras[ 1 * 8], (void *) &(startPoint_addr));
@@ -102,6 +107,8 @@ void sw_computing_core(char *paras) {
   setP((void *) &paras[15 * 8], (void *) &(sh_ewald));
   setP((void *) &paras[16 * 8], (void *) &(sh_invrc6));
   setP((void *) &paras[17 * 8], (void *) &(facel));
+  setP((void *) &paras[18 * 8], (void *) &(bEner));
+  setP((void *) &paras[19 * 8], (void *) &(fshift_addr));
   getAll((void *) &startPoint_addr[threadST], (void *) &tempPtr, sizeof(void *));
   nbat_xstride = long_nbat_xstride; nbat_fstride = long_nbat_fstride; ntype = long_ntype;
 
@@ -112,10 +119,13 @@ void sw_computing_core(char *paras) {
   /* Attributes */
   real vcoul = 0;
   int cj4_ind, cj4_ind0, cj4_ind1, rshift;
+  volatile int putback_counter = 0, putback_reply = 0;
 
   // cpe_printf("cpe_start_addr = %p\n", tempPtr);
   // cpe_printf("cqq: %d %d %d %d %lf %lf\n", nsci, nbat_xstride, nbat_fstride, ntype, rcut2, rvdw2);
   for(n = threadST; n < threadED; ++ n) {
+    real vv0, vv1 = 0;
+    getAll((void *) &vctot_addr[n], (void *) &vv0, sizeof(real));
     getTrans(&ish3, sizeof(int));
     getTrans(&cj4_ind0, sizeof(int));
     getTrans(&cj4_ind1, sizeof(int));
@@ -145,11 +155,13 @@ void sw_computing_core(char *paras) {
             /* 8KB Here */
             getTrans((void *) xii, (7 * nbat_xstride + 4) * sizeof(real));
             getTrans((void *) typeii, 8 * sizeof(int));
-            getTrans((void *) fii, (7 * nbat_fstride + 3) * sizeof(real));
+            void *bfii = (void *) tempPtr;
+            fakTrans((void *) fii, (7 * nbat_fstride + 3) * sizeof(real));
 
             getTrans((void *) xjj, (7 * nbat_xstride + 4) * sizeof(real));
             getTrans((void *) typejj, 8 * sizeof(int));
-            getTrans((void *) fjj, (7 * nbat_fstride + 3) * sizeof(real));
+            void *bfjj = (void *) tempPtr;
+            fakTrans((void *) fjj, (7 * nbat_fstride + 3) * sizeof(real));
 
             for (ic = 0; ic < CL_SIZE; ic++) { // CL_SIZE = 8
               ia               = ic;
@@ -196,7 +208,7 @@ void sw_computing_core(char *paras) {
                   getAll((void *) &Ftab_addr[n0], (void *) Ftab, sizeof(real) * 2);
                   fexcl = (1 - eps)*Ftab[0] + eps*Ftab[1];
                   fscal = qq*(int_bit*rinvsq - fexcl)*rinv;
-                  // if (bEner) vcoul = qq*((int_bit - gmx_erf(ewaldcoeff_q*r))*rinv - int_bit*sh_ewald); !!!
+                  if (bEner) vcoul = qq*((int_bit - gmx_erff(ewaldcoeff_q*r))*rinv - int_bit*sh_ewald);
                   if (rsq < rvdw2) {
                       tj        = nti + 2*typejj[ja];
 
@@ -210,14 +222,12 @@ void sw_computing_core(char *paras) {
                       Vvdw_rep  = c12*rinvsix*rinvsix;
                       fscal    += (Vvdw_rep - Vvdw_disp)*rinvsq;
 
-                      /*
                       if (bEner) {
-                          vctot[n]   += vcoul;
-                          Vvdwtot[n] +=
+                          vv0   += vcoul;
+                          vv1   +=
                               (Vvdw_rep - int_bit*c12*sh_invrc6*sh_invrc6)/12 -
                               (Vvdw_disp - int_bit*c6*sh_invrc6)/6;
                       }
-                      */
                   }
 
                   tx        = fscal*dx;
@@ -238,12 +248,20 @@ void sw_computing_core(char *paras) {
               fshift[1]   = fshift[1] + fiy;
               fshift[2]   = fshift[2] + fiz;
             } /* ic */
-
+            athread_put(PE_MODE, (void *) fii, (void *) bfii, (7 * nbat_fstride + 3) * sizeof(real), (void *) &putback_reply, 0, 0);
+            athread_put(PE_MODE, (void *) fjj, (void *) bfjj, (7 * nbat_fstride + 3) * sizeof(real), (void *) &putback_reply, 0, 0);
+            putback_counter += 2;
             /* put f back */
           } /* if */
         } /* im_Loop */
       } /* jm_Loop */
     } /* cj4_Loop */
     /* put fshift back */
+    /* put vv0, vv1 back */
+    athread_put(PE_MODE, (void *) fshift, (void *) &fshift_addr[n * 3], sizeof(real) * 3, (void *) &putback_reply, 0, 0);
+    athread_put(PE_MODE, (void *) &vv0, (void *) &vctot_addr[n], sizeof(real), (void *) &putback_reply, 0, 0);
+    athread_put(PE_MODE, (void *) &vv1, (void *) &Vvdwtot_addr[n], sizeof(real), (void *) &putback_reply, 0, 0);
+    putback_counter += 3;
   }
+  while(putback_reply != putback_counter);
 }
