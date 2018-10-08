@@ -172,7 +172,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                         /* jc: 0 to 8 */
                         addTrans(tempPtrG, (void *) &x[(cj * CL_SIZE) * nbat->xstride], (7 * nbat->xstride + 4) * sizeof(real));
                         addTrans(tempPtrG, (void *) &type[cj * CL_SIZE], 8 * sizeof(int));
-                        fakTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], (7 * nbat->fstride + 3 )* sizeof(real));
+                        fakTrans(tempPtrG, (void *) &f[(cj * CL_SIZE) * nbat->fstride], (7 * nbat->fstride + 3) * sizeof(real));
                     }
                 }
             }
@@ -252,9 +252,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     for(ic = 0; ic < 8; ++ ic) {
                       ia = ci * CL_SIZE + ic;
                       ifs = ia*nbat->fstride;
-                      f[ifs+0] += iip[ifs-ic*nbat->fstride];
-                      f[ifs+1] += iip[ifs-ic*nbat->fstride];
-                      f[ifs+2] += iip[ifs-ic*nbat->fstride];
+                      f[ifs+0] += iip[ic*nbat->fstride];
+                      f[ifs+1] += iip[ic*nbat->fstride];
+                      f[ifs+2] += iip[ic*nbat->fstride];
                     }
                     tempPtrG += (7 * nbat->fstride + 3) * sizeof(real);
 
@@ -264,9 +264,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
                     for(jc = 0; jc < 8; ++ jc) {
                       ja = cj * CL_SIZE + jc;
                       jfs = ja*nbat->fstride;
-                      f[jfs+0] += iip[jfs-jc*nbat->fstride];
-                      f[jfs+1] += iip[jfs-jc*nbat->fstride];
-                      f[jfs+2] += iip[jfs-jc*nbat->fstride];
+                      f[jfs+0] += iip[jc*nbat->fstride];
+                      f[jfs+1] += iip[jc*nbat->fstride];
+                      f[jfs+2] += iip[jc*nbat->fstride];
                     }
                     tempPtrG += (7 * nbat->fstride + 3) * sizeof(real);
                 }
