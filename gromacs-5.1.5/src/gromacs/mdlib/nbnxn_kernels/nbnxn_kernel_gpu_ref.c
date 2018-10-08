@@ -211,7 +211,6 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     setP((void *) &paras[18 * 8], (void *) &(long_bEner));
     setP((void *) &paras[19 * 8], (void *) &(fshift_sum));
 
-    printf("mpe_addr: %p\n", f);
     athread_spawn(sw_computing_core, &paras);
     athread_join();
 
@@ -275,5 +274,4 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
           }
       }
     }
-    while(1);
 }
