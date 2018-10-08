@@ -73,8 +73,9 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
     real rcut2 = iconst->rcoulomb*iconst->rcoulomb;
     real rvdw2 = iconst->rvdw*iconst->rvdw;
     int *type = nbat->type;
-    gmx_bool bEner;
+    gmx_bool bEner, bEwald;
     bEner = (force_flags & GMX_FORCE_ENERGY);
+    bEwald = EEL_FULL(iconst->eeltype);
 
     /* Array */
     if(first_time_run == 0) {
@@ -220,6 +221,7 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
         Vvdw[0]       = Vvdw[0] + VvdwtotCopy[n];
         // if(n == 0) printf("%.3lf %.3lf %.3lf\n", fshift[ish3+0], fshift[ish3+1], fshift[ish3+2]);
       }
+      // printf("%.2lf %.2lf\n", vctotCopy[0], VvdwtotCopy[0]);
     }
 
     tempPtrG = transferData;
@@ -232,6 +234,8 @@ nbnxn_kernel_gpu_ref(const nbnxn_pairlist_t     *nbl,
       fshift[ish3 + 0] += fshift_sum[n * 3 + 0];
       fshift[ish3 + 1] += fshift_sum[n * 3 + 1];
       fshift[ish3 + 2] += fshift_sum[n * 3 + 2];
+      // printf("%.2lf %.2lf\n", fshift_sum[n * 3 + 0], fshift_sum[n * 3 + 1], fshift_sum[n * 3 + 2]);
+      // while(1);
       tempPtrG += 4 * sizeof(int) + 3 * sizeof(real);
       for (cj4_ind = cj4_ind0; (cj4_ind < cj4_ind1); cj4_ind++) {
           tempPtrG += 65 * sizeof(unsigned int);

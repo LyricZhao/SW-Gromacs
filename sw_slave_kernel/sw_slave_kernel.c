@@ -252,6 +252,7 @@ void sw_computing_core(char *paras) {
             athread_put(PE_MODE, (void *) fii, (void *) bfii, (7 * nbat_fstride + 3) * sizeof(real), (void *) &putback_reply, 0, 0);
             athread_put(PE_MODE, (void *) fjj, (void *) bfjj, (7 * nbat_fstride + 3) * sizeof(real), (void *) &putback_reply, 0, 0);
             putback_counter += 2;
+            while(putback_reply != putback_counter);
             /* put f back */
           } /* if */
         } /* im_Loop */
@@ -265,4 +266,5 @@ void sw_computing_core(char *paras) {
     putback_counter += 3;
     while(putback_reply != putback_counter);
   }
+  // cpe_printf("shift: %p\n", fshift_addr);
 }
